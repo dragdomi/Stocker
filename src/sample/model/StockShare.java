@@ -5,9 +5,6 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class StockShare {
-
-    private SimpleStringProperty companyName;
 
 
 public class StockShare {
@@ -19,12 +16,9 @@ public class StockShare {
     private SimpleDoubleProperty totalValueOfShares;
 
 
-    public StockShare(String companyName, String stockIndex, double sharePrice, int numberOfShares){
-        this.companyName = new SimpleStringProperty(companyName);
 
     public StockShare(String stockName, String stockIndex, double sharePrice, int numberOfShares){
         this.stockName = new SimpleStringProperty(stockName);
-
         this.stockIndex = new SimpleStringProperty(stockIndex);
         this.sharePrice = new SimpleDoubleProperty(sharePrice);
         this.numberOfShares = new SimpleIntegerProperty(numberOfShares);
@@ -32,58 +26,50 @@ public class StockShare {
     }
 
 
+            public String getStockName () {
+                return this.stockName.get();
+            }
 
-    public String getCompanyName(){
-        return this.companyName.get();
-    }
+            public void setStockName (String stockName){
+                this.stockName = new SimpleStringProperty(stockName);
 
-    public void setCompanyName(String companyName){
-        this.companyName = new SimpleStringProperty(companyName);
-
-    public String getStockName(){
-        return this.stockName.get();
-    }
-
-    public void setStockName(String stockName){
-        this.stockName = new SimpleStringProperty(stockName);
-
-    }
+            }
 
 
-    public String getStockIndex(){
-        return this.stockIndex.get();
-    }
+            public String getStockIndex () {
+                return this.stockIndex.get();
+            }
 
-    public void setStockIndex(String stockIndex){
-        this.stockIndex = new SimpleStringProperty(stockIndex);
-    }
+            public void setStockIndex (String stockIndex){
+                this.stockIndex = new SimpleStringProperty(stockIndex);
+            }
 
-  //  private double sharePrice;
-   // private int numberOfShares;
-    //private double totalValueOfShares;
+            //  private double sharePrice;
+            // private int numberOfShares;
+            //private double totalValueOfShares;
 
-    public double getSharePrice(){
-        return this.sharePrice.get();
-    }
+            public double getSharePrice(){
+                return this.sharePrice.get();
+            }
 
-    public void setSharePrice(double sharePrice){
-        this.sharePrice = new SimpleDoubleProperty(sharePrice);
-    }
+            public void setSharePrice ( double sharePrice){
+                this.sharePrice = new SimpleDoubleProperty(sharePrice);
+            }
 
-    public int getNumberOfShares(){
-        return this.numberOfShares.get();
-    }
+            public int getNumberOfShares(){
+                return this.numberOfShares.get();
+            }
 
-    public void setNumberOfShares(int numberOfShares){
-        this.numberOfShares = new SimpleIntegerProperty(numberOfShares);
-    }
+            public void setNumberOfShares ( int numberOfShares){
+                this.numberOfShares = new SimpleIntegerProperty(numberOfShares);
+            }
 
-    public void setTotalValueOfShares(int numberOfShares, double sharePrice){
-        this.totalValueOfShares = new SimpleDoubleProperty(numberOfShares*sharePrice);
-    }
+            public void setTotalValueOfShares ( int numberOfShares, double sharePrice){
+                this.totalValueOfShares = new SimpleDoubleProperty(numberOfShares * sharePrice);
+            }
 
-    public double getTotalValueOfShares(){
-        return this.totalValueOfShares.get();
-    }
+            public double getTotalValueOfShares () {
+                return this.totalValueOfShares.get();
+            }
 
-}
+        }
