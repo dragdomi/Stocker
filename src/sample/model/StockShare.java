@@ -8,18 +8,29 @@ import javafx.beans.property.StringProperty;
 public class StockShare {
 
     private SimpleStringProperty companyName;
+
+
+public class StockShare {
+
+    private SimpleStringProperty stockName;
     private SimpleStringProperty stockIndex;
     private SimpleDoubleProperty sharePrice;
     private SimpleIntegerProperty numberOfShares;
     private SimpleDoubleProperty totalValueOfShares;
 
+
     public StockShare(String companyName, String stockIndex, double sharePrice, int numberOfShares){
         this.companyName = new SimpleStringProperty(companyName);
+
+    public StockShare(String stockName, String stockIndex, double sharePrice, int numberOfShares){
+        this.stockName = new SimpleStringProperty(stockName);
+
         this.stockIndex = new SimpleStringProperty(stockIndex);
         this.sharePrice = new SimpleDoubleProperty(sharePrice);
         this.numberOfShares = new SimpleIntegerProperty(numberOfShares);
         this.totalValueOfShares = new SimpleDoubleProperty(numberOfShares * sharePrice);
     }
+
 
 
     public String getCompanyName(){
@@ -28,6 +39,14 @@ public class StockShare {
 
     public void setCompanyName(String companyName){
         this.companyName = new SimpleStringProperty(companyName);
+
+    public String getStockName(){
+        return this.stockName.get();
+    }
+
+    public void setStockName(String stockName){
+        this.stockName = new SimpleStringProperty(stockName);
+
     }
 
 
