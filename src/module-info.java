@@ -3,4 +3,5 @@ module Stocker {
     requires javafx.controls;
 
     opens sample;
+    opens sample.model;
 }
