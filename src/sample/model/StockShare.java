@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.awt.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 public class StockShare {
@@ -14,7 +16,6 @@ public class StockShare {
     private SimpleDoubleProperty sharePrice;
     private SimpleIntegerProperty numberOfShares;
     private SimpleDoubleProperty totalValueOfShares;
-
 
 
     public StockShare(String stockName, String stockIndex, double sharePrice, int numberOfShares){
@@ -70,6 +71,17 @@ public class StockShare {
 
             public double getTotalValueOfShares () {
                 return this.totalValueOfShares.get();
+            }
+
+
+            public void calculateCurrentSharePrice(){
+                double random = ThreadLocalRandom.current().nextDouble(-10, 10);
+                random = (double) Math.round(random*100)/100;
+
+                double newCurrentPrice = this.getSharePrice() * (1 + random/100);
+                newCurrentPrice = (double) Math.round(newCurrentPrice * 100)/100;
+
+                this.setSharePrice(newCurrentPrice);
             }
 
         }
