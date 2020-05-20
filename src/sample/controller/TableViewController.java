@@ -56,12 +56,12 @@ public class TableViewController {
         tableViewBox.setSpacing(5);
 
         tableViewBox.setPadding(new Insets(10, 10, 10, 10));
-        tableViewBox.getChildren().addAll(yourSharesLabel, overviewTable, addNewCompanyToTableView(listOfStocks));
+        tableViewBox.getChildren().addAll(yourSharesLabel, overviewTable, addNewCompanyToTableView());
 
         return tableViewBox;
     }
 
-    HBox addNewCompanyToTableView(ObservableList listOfStocks) {
+    HBox addNewCompanyToTableView() {
 
         HBox addNewCompany = new HBox();
 
@@ -105,7 +105,16 @@ public class TableViewController {
             }
         });
 
-        addNewCompany.getChildren().addAll(companyName, stockIndex, sharePrice, numberOfShares, addCompanyButton);
+        Button simulateButton = new Button("Simulate");
+        simulateButton.setPrefWidth(80);
+        simulateButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stocks.simulateStockSharesPrices();
+            }
+        });
+
+        addNewCompany.getChildren().addAll(companyName, stockIndex, sharePrice, numberOfShares, addCompanyButton, simulateButton);
 
 
         return addNewCompany;
