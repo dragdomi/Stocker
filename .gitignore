@@ -27,3 +27,6 @@ out/
 
 # Iml files
 .iml
+
+# Personal filet
+.DS_Store
