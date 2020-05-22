@@ -34,3 +34,6 @@ out/
 # Idea filet
 .idea/
 .idea/workspace.xml
+
+# Private
+.DS_Store
