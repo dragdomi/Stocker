@@ -34,6 +34,9 @@ out/
 # Idea filet
 .idea/
 .idea/workspace.xml
+<<<<<<< HEAD
 
 # Private
 .DS_Store
+=======
+>>>>>>> master
