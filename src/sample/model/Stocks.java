@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.Collections;
-import java.util.Random;
 
 public class Stocks {
     private ObservableList<StockShare> stocksList = FXCollections.observableArrayList();
@@ -23,13 +22,5 @@ public class Stocks {
 
     public ObservableList getStocksList() {
         return this.stocksList;
-    }
-
-    public void simulateStockSharesPrices() {
-        for (StockShare stock: stocksList) {
-            Random r = new Random();
-            double randomValue = 0.0 + (50.0 - 0.0) * r.nextDouble();
-            stock.setSharePrice(stock.getSharePrice() + randomValue);
-        }
     }
 }
