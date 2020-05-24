@@ -13,6 +13,9 @@ import javafx.scene.layout.VBox;
  */
 public class SideMenuViewController {
     private MainViewController mainViewController;
+    private int buttonsPrefWidth = 80;
+    private int buttonsPrefHeight = 40;
+
 
     /**
      * @param mainViewController view controller to be set as a main view controller known by this class
@@ -28,24 +31,21 @@ public class SideMenuViewController {
     public VBox loadSideMenu() {
         VBox sideMenu = new VBox();
 
-        int buttonsPrefWidth = 80;
-        int buttonsPrefHeight = 40;
         sideMenu.setPadding(new Insets(10,10,10,10));
         sideMenu.setSpacing(10);
 
         Button overviewButton = new Button("Overview");
-        overviewButton.setPrefWidth(buttonsPrefWidth);
-        overviewButton.setPrefHeight(buttonsPrefHeight);
+        setUpButton(overviewButton);
         overviewButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                mainViewController.setCenter(mainViewController.overviewBox);
                 System.out.println("Overwiew view should appear");
             }
         });
 
         Button addButton = new Button("Add");
-        addButton.setPrefWidth(buttonsPrefWidth);
-        addButton.setPrefHeight(buttonsPrefHeight);
+        setUpButton(addButton);
         addButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -54,8 +54,7 @@ public class SideMenuViewController {
         });
 
         Button profileButton = new Button("Profile");
-        profileButton.setPrefWidth(buttonsPrefWidth);
-        profileButton.setPrefHeight(buttonsPrefHeight);
+        setUpButton(profileButton);
         profileButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -64,8 +63,7 @@ public class SideMenuViewController {
         });
 
         Button aboutUsButton = new Button("About us");
-        aboutUsButton.setPrefWidth(buttonsPrefWidth);
-        aboutUsButton.setPrefHeight(buttonsPrefHeight);
+        setUpButton(aboutUsButton);
         aboutUsButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -75,5 +73,10 @@ public class SideMenuViewController {
 
         sideMenu.getChildren().addAll(overviewButton, addButton, profileButton, aboutUsButton);
         return sideMenu;
+    }
+
+    private void setUpButton(Button button) {
+        button.setPrefHeight(buttonsPrefHeight);
+        button.setPrefWidth(buttonsPrefWidth);
     }
 }
