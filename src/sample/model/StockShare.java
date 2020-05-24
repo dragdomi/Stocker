@@ -5,17 +5,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-
-
 public class StockShare {
-
     private SimpleStringProperty stockName;
     private SimpleStringProperty stockIndex;
     private SimpleDoubleProperty sharePrice;
     private SimpleIntegerProperty numberOfShares;
     private SimpleDoubleProperty totalValueOfShares;
-
-
 
     public StockShare(String stockName, String stockIndex, double sharePrice, int numberOfShares){
         this.stockName = new SimpleStringProperty(stockName);
@@ -24,17 +19,14 @@ public class StockShare {
         this.numberOfShares = new SimpleIntegerProperty(numberOfShares);
         this.totalValueOfShares = new SimpleDoubleProperty(numberOfShares * sharePrice);
     }
-
-
+    
             public String getStockName () {
                 return this.stockName.get();
             }
 
             public void setStockName (String stockName){
                 this.stockName = new SimpleStringProperty(stockName);
-
             }
-
 
             public String getStockIndex () {
                 return this.stockIndex.get();
@@ -43,10 +35,6 @@ public class StockShare {
             public void setStockIndex (String stockIndex){
                 this.stockIndex = new SimpleStringProperty(stockIndex);
             }
-
-            //  private double sharePrice;
-            // private int numberOfShares;
-            //private double totalValueOfShares;
 
             public double getSharePrice(){
                 return this.sharePrice.get();
@@ -71,5 +59,4 @@ public class StockShare {
             public double getTotalValueOfShares () {
                 return this.totalValueOfShares.get();
             }
-
         }
