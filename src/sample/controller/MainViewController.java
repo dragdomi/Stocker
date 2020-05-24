@@ -16,9 +16,11 @@ public class MainViewController {
 
     private BorderPane mainLayout = new BorderPane();
 
+    private OverviewViewController overviewViewController = new OverviewViewController();
     private TableViewController tableViewController = new TableViewController();
     private SideMenuViewController sideMenuViewController = new SideMenuViewController();
 
+    public VBox overviewBox = overviewViewController.loadOverviewView();
     public VBox tableViewBox = tableViewController.loadTableView();
     public VBox sideMenu = sideMenuViewController.loadSideMenu();
 
@@ -34,8 +36,8 @@ public class MainViewController {
      */
     public void setupMainScene() {
         sideMenuViewController.setMainViewController(this);
-        mainLayout.setCenter(tableViewBox);
-        mainLayout.setLeft(sideMenu);
+        mainLayout.setCenter(overviewBox);
+        mainLayout.setLeft(sideMenuViewController.loadSideMenu());
 
         Scene mainScene = new Scene(mainLayout, 800, 400);
 
