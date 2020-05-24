@@ -3,7 +3,6 @@ package sample.model;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 public class StockShare {
     private SimpleStringProperty stockName;
@@ -19,7 +18,7 @@ public class StockShare {
         this.numberOfShares = new SimpleIntegerProperty(numberOfShares);
         this.totalValueOfShares = new SimpleDoubleProperty(numberOfShares * sharePrice);
     }
-    
+
             public String getStockName () {
                 return this.stockName.get();
             }

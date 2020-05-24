@@ -6,7 +6,6 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-
 /**
  * view used as a navigation menu for the app
  * @author Dominik Drag
@@ -15,7 +14,6 @@ public class SideMenuViewController {
     private MainViewController mainViewController;
     private int buttonsPrefWidth = 80;
     private int buttonsPrefHeight = 40;
-
 
     /**
      * @param mainViewController view controller to be set as a main view controller known by this class
@@ -49,6 +47,7 @@ public class SideMenuViewController {
         addButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                mainViewController.setCenter(mainViewController.tableViewBox);
                 System.out.println("Add view should appear");
             }
         });
