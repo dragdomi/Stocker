@@ -1,13 +1,8 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import sample.controller.MainViewController;
-import sample.controller.SideMenuViewController;
-import sample.controller.TableViewController;
-
 
 public class Main extends Application {
     private MainViewController mainViewController = new MainViewController();
