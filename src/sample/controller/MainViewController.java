@@ -17,11 +17,11 @@ public class MainViewController {
     private BorderPane mainLayout = new BorderPane();
 
     private OverviewViewController overviewViewController = new OverviewViewController();
-    private TableViewController tableViewController = new TableViewController();
+    private AddViewController addViewController = new AddViewController();
     private SideMenuViewController sideMenuViewController = new SideMenuViewController();
 
     public VBox overviewBox = overviewViewController.loadOverviewView();
-    public VBox tableViewBox = tableViewController.loadTableView();
+    public VBox addViewBox = addViewController.loadAddView();
     public VBox sideMenu = sideMenuViewController.loadSideMenu();
 
     /**

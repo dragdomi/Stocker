@@ -47,7 +47,7 @@ public class SideMenuViewController {
         addButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                mainViewController.setCenter(mainViewController.tableViewBox);
+                mainViewController.setCenter(mainViewController.addViewBox);
                 System.out.println("Add view should appear");
             }
         });
