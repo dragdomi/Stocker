@@ -11,7 +11,7 @@ InVision Project ScreenShoots:
 ![Buy Stock](https://github.com/dragdominique/Stocker/blob/Images/But%20Stock.jpg)
 
 <b>Details</b>
-![Details](https://github.com/dragdominique/Stocker/blob/Images/But%20Stock.jpg)
+![Details](https://github.com/dragdominique/Stocker/blob/Images/Details.jpg)
 
 <b>Overview</b>
 ![Overview](https://github.com/dragdominique/Stocker/blob/Images/Overview.jpg)
