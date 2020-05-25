@@ -37,6 +37,12 @@ public class OverviewViewController {
         change.setCellValueFactory(new PropertyValueFactory<>("change"));
         changePercent.setCellValueFactory(new PropertyValueFactory<>("changePercent"));
 
+        companyName.setPrefWidth(116);
+        stockIndex.setPrefWidth(116);
+        sharePrice.setPrefWidth(116);
+        change.setPrefWidth(116);
+        changePercent.setPrefWidth(116);
+
         overviewTable.setItems(listOfStocks);
 
         overviewTable.getColumns().addAll(companyName, stockIndex, sharePrice, change, changePercent);
