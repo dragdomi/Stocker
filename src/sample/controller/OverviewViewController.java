@@ -21,6 +21,10 @@ public class OverviewViewController {
 
     private final ObservableList<StockShare> listOfStocks = stocks.getStocksList();
 
+    /**
+     * Method to load table view, overview of stocks
+     * @return overviewTable
+     */
     public VBox loadOverviewView () {
         Label overviewLabel = new Label("Overview");
         overviewTable.setEditable(true);

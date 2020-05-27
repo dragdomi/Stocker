@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 
 /**
  * view used as a navigation menu for the app
- * @author Dominik Drag
+ * @author Dominik Drag, Arystydes Krukar
  */
 public class SideMenuViewController {
     private MainViewController mainViewController;
@@ -67,6 +67,7 @@ public class SideMenuViewController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 System.out.println("About us view should appar");
+                mainViewController.setCenter(mainViewController.profileBox);
             }
         });
 

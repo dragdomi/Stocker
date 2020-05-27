@@ -3,13 +3,14 @@ package sample.controller;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
  * Main view controller
  * Used to store other view controllers and manage scenes and layout of the app.
- * @author Dominik Drag
+ * @author Dominik Drag, Arystydes Krukar
  */
 public class MainViewController {
     private Stage mainStage;
@@ -19,10 +20,12 @@ public class MainViewController {
     private OverviewViewController overviewViewController = new OverviewViewController();
     private AddViewController addViewController = new AddViewController();
     private SideMenuViewController sideMenuViewController = new SideMenuViewController();
+    private AboutUsViewController aboutUsViewController = new AboutUsViewController();
 
     public VBox overviewBox = overviewViewController.loadOverviewView();
     public VBox addViewBox = addViewController.loadAddView();
     public VBox sideMenu = sideMenuViewController.loadSideMenu();
+    public HBox profileBox = aboutUsViewController.loadProfileView();
 
     /**
      * @param stage stage to be set as a main stage

@@ -22,6 +22,10 @@ public class AddViewController {
 
     final ObservableList<StockShare> listOfStocks = stocks.getStocksList();
 
+    /**
+     *
+     * @return tableViewBox
+     */
     public VBox loadAddView() {
         Label yourSharesLabel = new Label("Your Stock Shares");
         overviewTable.setEditable(true);
