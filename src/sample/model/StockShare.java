@@ -7,16 +7,22 @@ import javafx.beans.property.SimpleStringProperty;
 public class StockShare {
     private SimpleStringProperty stockName;
     private SimpleStringProperty stockIndex;
-    private SimpleDoubleProperty sharePrice;
+    private SimpleDoubleProperty boughtPrice;
+    private SimpleDoubleProperty actualPrice;
     private SimpleIntegerProperty numberOfShares;
+    private SimpleDoubleProperty change;
+    private SimpleDoubleProperty changePercent;
     private SimpleDoubleProperty totalValueOfShares;
 
-    public StockShare(String stockName, String stockIndex, double sharePrice, int numberOfShares){
+    public StockShare(String stockName, String stockIndex, double boughtPrice,double actualPrice, int numberOfShares,double change){
         this.stockName = new SimpleStringProperty(stockName);
         this.stockIndex = new SimpleStringProperty(stockIndex);
-        this.sharePrice = new SimpleDoubleProperty(sharePrice);
+        this.boughtPrice = new SimpleDoubleProperty(boughtPrice);
+        this.actualPrice = new SimpleDoubleProperty(actualPrice);
+        this.change = new SimpleDoubleProperty(change);
+        this.changePercent = new SimpleDoubleProperty(change/100);
         this.numberOfShares = new SimpleIntegerProperty(numberOfShares);
-        this.totalValueOfShares = new SimpleDoubleProperty(numberOfShares * sharePrice);
+        this.totalValueOfShares = new SimpleDoubleProperty(numberOfShares * actualPrice);
     }
 
             public String getStockName () {
@@ -35,13 +41,29 @@ public class StockShare {
                 this.stockIndex = new SimpleStringProperty(stockIndex);
             }
 
-            public double getSharePrice(){
-                return this.sharePrice.get();
+            public double getBoughtPrice(){
+                return this.boughtPrice.get();
             }
 
-            public void setSharePrice ( double sharePrice){
-                this.sharePrice = new SimpleDoubleProperty(sharePrice);
-            }
+            public void setBoughtPrice ( double boughtPrice){ this.boughtPrice = new SimpleDoubleProperty(boughtPrice); }
+
+            public double getChange(){
+        return this.change.get();
+    }
+
+            public void setChange ( double changePrice){ this.change = new SimpleDoubleProperty(changePrice); }
+
+            public double getChangePercent(){
+        return this.change.get();
+    }
+
+            public void setChangePercent ( double changePrice){ this.change = new SimpleDoubleProperty(changePrice/100); }
+
+            public double getActualPrice(){
+        return this.actualPrice.get();
+    }
+
+            public void setActualPrice ( double actualPrice){ this.actualPrice = new SimpleDoubleProperty(actualPrice); }
 
             public int getNumberOfShares(){
                 return this.numberOfShares.get();
