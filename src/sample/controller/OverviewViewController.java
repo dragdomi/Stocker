@@ -11,12 +11,12 @@ import sample.model.StockShare;
 import sample.model.Stocks;
 
 public class OverviewViewController {
-    private TableView<StockShare> overviewTable = new TableView<StockShare>();
+    public TableView<StockShare> overviewTable = new TableView<StockShare>();
 
-    private final Stocks stocks = new Stocks(
-            new StockShare("CDR", "WIG20", 346, 346,1000,0.13),
-            new StockShare("CDR", "WIG20", 346, 346,1000,0.13),
-            new StockShare("CDR", "WIG20", 346, 346,1000,0.13)
+    public final Stocks stocks = new Stocks(
+            new StockShare("CDR", "WIG20", 346, 346),
+            new StockShare("CDR", "WIG20", 346, 346),
+            new StockShare("CDR", "WIG20", 346, 346)
     );
 
     private final ObservableList<StockShare> listOfStocks = stocks.getStocksList();
