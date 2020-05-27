@@ -42,7 +42,7 @@ public class SideMenuViewController {
             }
         });
 
-        Button addButton = new Button("Add");
+        Button addButton = new Button("Buy Share");
         setUpButton(addButton);
         addButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

@@ -14,15 +14,15 @@ public class StockShare {
     private SimpleDoubleProperty changePercent;
     private SimpleDoubleProperty totalValueOfShares;
 
-    public StockShare(String stockName, String stockIndex, double boughtPrice,double actualPrice, int numberOfShares,double change){
+    public StockShare(String stockName, String stockIndex, double boughtPrice, int numberOfShares){
         this.stockName = new SimpleStringProperty(stockName);
         this.stockIndex = new SimpleStringProperty(stockIndex);
         this.boughtPrice = new SimpleDoubleProperty(boughtPrice);
-        this.actualPrice = new SimpleDoubleProperty(actualPrice);
-        this.change = new SimpleDoubleProperty(change);
-        this.changePercent = new SimpleDoubleProperty(change/100);
+        this.actualPrice = new SimpleDoubleProperty(boughtPrice);
+        this.change = new SimpleDoubleProperty(boughtPrice - boughtPrice);
+        this.changePercent = new SimpleDoubleProperty((boughtPrice-boughtPrice)/100);
         this.numberOfShares = new SimpleIntegerProperty(numberOfShares);
-        this.totalValueOfShares = new SimpleDoubleProperty(numberOfShares * actualPrice);
+        this.totalValueOfShares = new SimpleDoubleProperty(numberOfShares * boughtPrice);
     }
 
             public String getStockName () {
@@ -51,13 +51,13 @@ public class StockShare {
         return this.change.get();
     }
 
-            public void setChange ( double changePrice){ this.change = new SimpleDoubleProperty(changePrice); }
+            public void setChange ( double actualPrice, double boughtPrice){ this.change = new SimpleDoubleProperty(actualPrice-boughtPrice); }
 
             public double getChangePercent(){
         return this.change.get();
     }
 
-            public void setChangePercent ( double changePrice){ this.change = new SimpleDoubleProperty(changePrice/100); }
+            public void setChangePercent ( double actualPrice, double boughtPrice){ this.change = new SimpleDoubleProperty((actualPrice-boughtPrice)/100); }
 
             public double getActualPrice(){
         return this.actualPrice.get();

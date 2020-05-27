@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
@@ -12,82 +13,44 @@ import sample.model.StockShare;
 import sample.model.Stocks;
 
 public class AddViewController {
-    private TableView<StockShare> overviewTable = new TableView<StockShare>();
-
-    private final Stocks stocks = new Stocks(
-            new StockShare("CDR", "WIG20", 346, 346,1000,0.13),
-            new StockShare("CDR", "WIG20", 346, 346,1000,0.13),
-            new StockShare("CDR", "WIG20", 346, 346,1000,0.13)
-    );
-
-    final ObservableList<StockShare> listOfStocks = stocks.getStocksList();
+    OverviewViewController overviewViewController = new OverviewViewController();
 
     /**
      *
      * @return tableViewBox
      */
     public VBox loadAddView() {
-        Label yourSharesLabel = new Label("Your Stock Shares");
-        overviewTable.setEditable(true);
+        VBox boughtStock = new VBox();
 
-        TableColumn<StockShare, String> companyName = new TableColumn<>("Company Name");
-        TableColumn<StockShare, String> stockIndex = new TableColumn<>("Stock Index");
-        TableColumn<StockShare, Double> sharePrice = new TableColumn("Purchase Price");
-        TableColumn<StockShare, Integer> numberOfShares = new TableColumn("Number of Shares");
-        TableColumn<StockShare, Double> totalValue = new TableColumn("Total Value");
+        boughtStock.setAlignment(Pos.CENTER);
 
-
-        companyName.setCellValueFactory(new PropertyValueFactory<>("stockName"));
-        stockIndex.setCellValueFactory(new PropertyValueFactory<>("stockIndex"));
-        sharePrice.setCellValueFactory(new PropertyValueFactory<>("sharePrice"));
-        numberOfShares.setCellValueFactory(new PropertyValueFactory<>("numberOfShares"));
-        totalValue.setCellValueFactory(new PropertyValueFactory<>("totalValueOfShares"));
-
-
-        companyName.setPrefWidth(116);
-        stockIndex.setPrefWidth(116);
-        sharePrice.setPrefWidth(116);
-        numberOfShares.setPrefWidth(116);
-        totalValue.setPrefWidth(116);
-
-
-        overviewTable.setItems(listOfStocks);
-
-        overviewTable.getColumns().addAll(companyName, stockIndex, sharePrice, numberOfShares, totalValue);
-
-
-        VBox tableViewBox = new VBox();
-        tableViewBox.setSpacing(5);
-
-        tableViewBox.setPadding(new Insets(10, 10, 10, 10));
-        //tableViewBox.getChildren().addAll(yourSharesLabel, overviewTable, addNewCompanyToTableView(listOfStocks));
-
-        return tableViewBox;
-    }
-
-    /*HBox addNewCompanyToTableView(ObservableList listOfStocks) {
-
-        HBox addNewCompany = new HBox();
+        Label buyLabel = new Label("Buy Share");
+        buyLabel.setPrefSize(120,66);
 
         TextField companyName = new TextField();
         companyName.setPromptText("Company Name");
-        companyName.setPrefWidth(125);
+        companyName.setPrefHeight(50);
+        companyName.setPrefWidth(120);
 
         TextField stockIndex = new TextField();
         stockIndex.setPromptText("Stock Index");
-        stockIndex.setPrefWidth(125);
+        stockIndex.setPrefHeight(50);
+        stockIndex.setPrefWidth(120);
 
         TextField sharePrice = new TextField();
         sharePrice.setPromptText("Share Price");
-        sharePrice.setPrefWidth(125);
+        sharePrice.setPrefHeight(50);
+        sharePrice.setPrefWidth(120);
 
         TextField numberOfShares = new TextField();
         numberOfShares.setPromptText("Number Of Shares");
-        numberOfShares.setPrefWidth(125);
+        numberOfShares.setPrefHeight(50);
+        numberOfShares.setPrefWidth(120);
 
-        Button addCompanyButton = new Button("Add");
-        addCompanyButton.setPrefWidth(80);
-        addCompanyButton.setOnAction(new EventHandler<ActionEvent>() {
+
+        Button buyCompanyButton = new Button("BUY");
+        buyCompanyButton.setPrefWidth(120);
+        buyCompanyButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 String sharePriceString = String.format("%s", sharePrice.getCharacters());
@@ -95,13 +58,15 @@ public class AddViewController {
                 Double sharePriceDouble = Double.valueOf(sharePriceString);
                 Integer numberOfSharesInt = Integer.valueOf(numberOfSharesString);
 
-                stocks.addStock(
-                        new StockShare(
-                                companyName.getText(),
-                                stockIndex.getText(),
-                                sharePriceDouble,
-                                numberOfSharesInt
-                        ));
+                //Dodanie spolki do OverView
+                overviewViewController.stocks.addStock(new StockShare(
+                        companyName.getText(),
+                        stockIndex.getText(),
+                        sharePriceDouble,
+                        numberOfSharesInt
+
+                ));
+
                 companyName.clear();
                 stockIndex.clear();
                 sharePrice.clear();
@@ -109,11 +74,10 @@ public class AddViewController {
             }
         });
 
-        addNewCompany.getChildren().addAll(companyName, stockIndex, sharePrice, numberOfShares, addCompanyButton);
+        boughtStock.setPadding(new Insets(10,300,10,300));
 
-
-        return addNewCompany;
-    }*/
-
+        boughtStock.getChildren().addAll(buyLabel,companyName,stockIndex,sharePrice,numberOfShares,buyCompanyButton);
+        return boughtStock;
+    }
 
 }
