@@ -57,6 +57,8 @@ public class SideMenuViewController {
         profileButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+
+                mainViewController.setCenter(mainViewController.profileViewBox);
                 System.out.println("Profile view should appear");
             }
         });

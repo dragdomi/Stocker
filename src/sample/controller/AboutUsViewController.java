@@ -20,8 +20,8 @@ public class AboutUsViewController {
         HBox mainView = new HBox();
         VBox firstPerson = new VBox();
         VBox secondPerson = new VBox();
-        firstPerson.setPrefWidth(300);
-        secondPerson.setPrefWidth(300);
+        firstPerson.setPrefWidth(500);
+        secondPerson.setPrefWidth(500);
 
 
 

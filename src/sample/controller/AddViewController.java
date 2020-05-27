@@ -15,9 +15,9 @@ public class AddViewController {
     private TableView<StockShare> overviewTable = new TableView<StockShare>();
 
     private final Stocks stocks = new Stocks(
-            new StockShare("CDR", "WIG20", 346, 50),
-            new StockShare("11bit", "mWIG40", 405.50, 123),
-            new StockShare("PKNOrlen", "WIG30", 61.50, 30)
+            new StockShare("CDR", "WIG20", 346, 346,1000,0.13),
+            new StockShare("CDR", "WIG20", 346, 346,1000,0.13),
+            new StockShare("CDR", "WIG20", 346, 346,1000,0.13)
     );
 
     final ObservableList<StockShare> listOfStocks = stocks.getStocksList();
@@ -60,12 +60,12 @@ public class AddViewController {
         tableViewBox.setSpacing(5);
 
         tableViewBox.setPadding(new Insets(10, 10, 10, 10));
-        tableViewBox.getChildren().addAll(yourSharesLabel, overviewTable, addNewCompanyToTableView(listOfStocks));
+        //tableViewBox.getChildren().addAll(yourSharesLabel, overviewTable, addNewCompanyToTableView(listOfStocks));
 
         return tableViewBox;
     }
 
-    HBox addNewCompanyToTableView(ObservableList listOfStocks) {
+    /*HBox addNewCompanyToTableView(ObservableList listOfStocks) {
 
         HBox addNewCompany = new HBox();
 
@@ -113,7 +113,7 @@ public class AddViewController {
 
 
         return addNewCompany;
-    }
+    }*/
 
 
 }

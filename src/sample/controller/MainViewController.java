@@ -21,11 +21,13 @@ public class MainViewController {
     private AddViewController addViewController = new AddViewController();
     private SideMenuViewController sideMenuViewController = new SideMenuViewController();
     private AboutUsViewController aboutUsViewController = new AboutUsViewController();
+    private ProfileViewController profileViewController = new ProfileViewController();
 
     public VBox overviewBox = overviewViewController.loadOverviewView();
     public VBox addViewBox = addViewController.loadAddView();
     public VBox sideMenu = sideMenuViewController.loadSideMenu();
     public HBox profileBox = aboutUsViewController.loadProfileView();
+    public VBox profileViewBox = profileViewController.loadProfileView();
 
     /**
      * @param stage stage to be set as a main stage
@@ -42,7 +44,7 @@ public class MainViewController {
         mainLayout.setCenter(overviewBox);
         mainLayout.setLeft(sideMenuViewController.loadSideMenu());
 
-        Scene mainScene = new Scene(mainLayout, 800, 400);
+        Scene mainScene = new Scene(mainLayout, 1030, 400);
 
         mainStage.setTitle("Stocker");
         mainStage.setScene(mainScene);

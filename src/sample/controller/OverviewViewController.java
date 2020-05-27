@@ -14,9 +14,9 @@ public class OverviewViewController {
     private TableView<StockShare> overviewTable = new TableView<StockShare>();
 
     private final Stocks stocks = new Stocks(
-            new StockShare("CDR", "WIG20", 346, 50),
-            new StockShare("11bit", "mWIG40", 405.50, 123),
-            new StockShare("PKNOrlen", "WIG30", 61.50, 30)
+            new StockShare("CDR", "WIG20", 346, 346,1000,0.13),
+            new StockShare("CDR", "WIG20", 346, 346,1000,0.13),
+            new StockShare("CDR", "WIG20", 346, 346,1000,0.13)
     );
 
     private final ObservableList<StockShare> listOfStocks = stocks.getStocksList();
@@ -31,25 +31,35 @@ public class OverviewViewController {
 
         TableColumn<StockShare, String> companyName = new TableColumn<>("Company Name");
         TableColumn<StockShare, String> stockIndex = new TableColumn<>("Stock Index");
-        TableColumn<StockShare, Double> sharePrice = new TableColumn("Share price");
+        TableColumn<StockShare, Double> boughtPrice = new TableColumn("Bought Price");
+        TableColumn<StockShare, Double> actualPrice = new TableColumn("Actual Price");
         TableColumn<StockShare, Double> change = new TableColumn("Change");
         TableColumn<StockShare, Double> changePercent = new TableColumn("Change (%)");
+        TableColumn<StockShare, Integer> numberOfShares = new TableColumn("Number Of Shares");
+        TableColumn<StockShare, Double> totalValueOfShares = new TableColumn("Total Value");
 
         companyName.setCellValueFactory(new PropertyValueFactory<>("stockName"));
         stockIndex.setCellValueFactory(new PropertyValueFactory<>("stockIndex"));
-        sharePrice.setCellValueFactory(new PropertyValueFactory<>("sharePrice"));
+        boughtPrice.setCellValueFactory(new PropertyValueFactory<>("boughtPrice"));
+        actualPrice.setCellValueFactory(new PropertyValueFactory<>("actualPrice"));
         change.setCellValueFactory(new PropertyValueFactory<>("change"));
         changePercent.setCellValueFactory(new PropertyValueFactory<>("changePercent"));
+        numberOfShares.setCellValueFactory(new PropertyValueFactory<>("numberOfShares"));
+        totalValueOfShares.setCellValueFactory(new PropertyValueFactory<>("totalValueOfShares"));
+
 
         companyName.setPrefWidth(116);
         stockIndex.setPrefWidth(116);
-        sharePrice.setPrefWidth(116);
+        boughtPrice.setPrefWidth(116);
+        actualPrice.setPrefWidth(116);
         change.setPrefWidth(116);
         changePercent.setPrefWidth(116);
+        numberOfShares.setPrefWidth(116);
+        totalValueOfShares.setPrefWidth(116);
 
         overviewTable.setItems(listOfStocks);
 
-        overviewTable.getColumns().addAll(companyName, stockIndex, sharePrice, change, changePercent);
+        overviewTable.getColumns().addAll(companyName, stockIndex, boughtPrice,actualPrice ,change, changePercent,numberOfShares,totalValueOfShares);
 
         VBox overviewBox = new VBox();
         overviewBox.setSpacing(5);
