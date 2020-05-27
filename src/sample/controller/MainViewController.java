@@ -19,10 +19,12 @@ public class MainViewController {
     private OverviewViewController overviewViewController = new OverviewViewController();
     private AddViewController addViewController = new AddViewController();
     private SideMenuViewController sideMenuViewController = new SideMenuViewController();
+    private ProfileViewController profileViewController = new ProfileViewController();
 
     public VBox overviewBox = overviewViewController.loadOverviewView();
     public VBox addViewBox = addViewController.loadAddView();
     public VBox sideMenu = sideMenuViewController.loadSideMenu();
+    public VBox profileViewBox = profileViewController.loadProfileView();
 
     /**
      * @param stage stage to be set as a main stage
