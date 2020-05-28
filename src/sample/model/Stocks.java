@@ -16,11 +16,25 @@ public class Stocks {
         this.stocksList.add(stock);
     }
 
+    public void addStocks(ObservableList<StockShare> stocksList) {
+        for (StockShare stock : stocksList) {
+            Collections.addAll(this.stocksList, stock);
+        }
+    }
+
     public void removeStock(StockShare stock) {
         this.stocksList.remove(stock);
     }
 
     public ObservableList getStocksList() {
         return this.stocksList;
+    }
+
+    public double getStocksTotalValue() {
+        double stocksValue = 0;
+        for(StockShare stock : stocksList) {
+            stocksValue += stock.getTotalValueOfShares();
+        }
+        return stocksValue;
     }
 }
