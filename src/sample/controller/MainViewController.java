@@ -6,6 +6,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sample.model.StockShare;
+import sample.model.Stocks;
+import sample.model.UserData;
 
 /**
  * Main view controller
@@ -17,17 +20,25 @@ public class MainViewController {
 
     private BorderPane mainLayout = new BorderPane();
 
+    public final Stocks stocks = new Stocks(
+            new StockShare("CDR", "WIG20", 346, 346),
+            new StockShare("CDR", "WIG20", 346, 346),
+            new StockShare("CDR", "WIG20", 346, 346)
+    );
+
+    private UserData userData = new UserData("Marian", "Chudy", 1000, stocks);
+
     private OverviewViewController overviewViewController = new OverviewViewController();
     private AddViewController addViewController = new AddViewController();
     private SideMenuViewController sideMenuViewController = new SideMenuViewController();
     private AboutUsViewController aboutUsViewController = new AboutUsViewController();
     private ProfileViewController profileViewController = new ProfileViewController();
 
-    public VBox overviewBox = overviewViewController.loadOverviewView();
-    public VBox addViewBox = addViewController.loadAddView();
-    public VBox sideMenu = sideMenuViewController.loadSideMenu();
-    public HBox profileBox = aboutUsViewController.loadProfileView();
-    public VBox profileViewBox = profileViewController.loadProfileView();
+    public VBox overviewBox;
+    public VBox addViewBox;
+    public VBox sideMenu;
+    public HBox aboutUsBox;
+    public VBox profileViewBox;
 
     /**
      * @param stage stage to be set as a main stage
@@ -41,6 +52,14 @@ public class MainViewController {
      */
     public void setupMainScene() {
         sideMenuViewController.setMainViewController(this);
+        profileViewController.setUserDataSource(userData);
+
+        overviewBox = overviewViewController.loadOverviewView();
+        addViewBox = addViewController.loadAddView();
+        sideMenu = sideMenuViewController.loadSideMenu();
+        aboutUsBox = aboutUsViewController.loadAboutUsView();
+        profileViewBox = profileViewController.loadProfileView();
+
         mainLayout.setCenter(overviewBox);
         mainLayout.setLeft(sideMenuViewController.loadSideMenu());
 

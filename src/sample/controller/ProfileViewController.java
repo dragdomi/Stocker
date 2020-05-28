@@ -1,21 +1,22 @@
 package sample.controller;
 
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
-import sample.model.StockShare;
-import sample.model.Stocks;
+import sample.model.UserData;
 
 public class ProfileViewController {
+    private UserData userData;
+
+    public void setUserDataSource(UserData userDataSource) {
+        this.userData = userDataSource;
+    }
 
     public VBox loadProfileView() {
         VBox profileView = new VBox();
@@ -48,6 +49,9 @@ public class ProfileViewController {
         Label userNameLabel = new Label("Name: ");
         Label userSurnameLabel = new Label("Surname: ");
 
+        userNameLabel.setText(userNameLabel.getText() + userData.getName());
+        userSurnameLabel.setText(userSurnameLabel.getText() + userData.getSurname());
+
         userNameLabel.setPadding(new Insets(0,10,10,0));
         userSurnameLabel.setPadding(new Insets(0,10,10,0));
         userDetails.getChildren().addAll(userNameLabel, userSurnameLabel);
@@ -61,6 +65,9 @@ public class ProfileViewController {
         userMoney.setAlignment(Pos.CENTER_LEFT);
         userMoney.setPrefHeight(80);
         Label userMoneyLabel = new Label("Money left: ");
+
+        userMoneyLabel.setText(userMoneyLabel.getText() + userData.getCash());
+
         setStyle(userMoney);
         userMoney.setPadding(new Insets(10,10,10,10));
         userMoney.getChildren().addAll(userMoneyLabel);
@@ -86,6 +93,9 @@ public class ProfileViewController {
 
         userTotalWalletValue.setPrefHeight(80);
         Label totalWalletValueLabel = new Label("Total wallet value: ");
+
+        totalWalletValueLabel.setText(totalWalletValueLabel.getText() + userData.getTotalWalletValue());
+
         userTotalWalletValue.setAlignment(Pos.CENTER_LEFT);
         setStyle(userTotalWalletValue);
         userTotalWalletValue.setPadding(new Insets(10,10,10,10));

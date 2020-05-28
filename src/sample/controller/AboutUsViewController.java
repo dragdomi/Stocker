@@ -15,7 +15,7 @@ public class AboutUsViewController {
      * Method to load profile view (set center after click button About Us on side menu)
      * @return mainView
      */
-    public HBox loadProfileView(){
+    public HBox loadAboutUsView(){
 
         HBox mainView = new HBox();
         VBox firstPerson = new VBox();
