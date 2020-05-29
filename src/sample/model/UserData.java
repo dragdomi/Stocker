@@ -30,7 +30,46 @@ public class UserData {
         return cash;
     }
 
+    public void setCash(double cash) {
+        this.cash = cash;
+    }
+
     public double getTotalWalletValue() {
         return ownedSharesList.getStocksTotalValue();
+    }
+
+    public void buyStockShare(StockShare stockShare, int amount) {
+        double operationValue = stockShare.getActualPrice() * amount;
+        if (operationValue <= getCash()){
+            System.out.println("Buying " + stockShare.getStockName());
+            System.out.println("Cash before operation: " + getCash());
+
+            ownedSharesList.addStock(stockShare);
+            setCash(getCash() - operationValue);
+            if (stockShare.getNumberOfShares() < 1) {
+                ownedSharesList.addStock(stockShare);
+            }
+
+            System.out.println(stockShare.getStockName() + " bought for " + operationValue);
+            System.out.println("Cash after operation: " + getCash());
+        }
+    }
+
+    public void sellStockShare(StockShare stockShare, int amount) {
+        double operationValue = stockShare.getActualPrice() * amount;
+        StockShare ownedStockShareToSell = ownedSharesList.getStockShare(stockShare);
+        if (amount <= stockShare.getNumberOfShares()) {
+            System.out.println("Selling " + ownedStockShareToSell.getStockName());
+            System.out.println("Cash before operation: " + getCash());
+
+            ownedStockShareToSell.setNumberOfShares(ownedStockShareToSell.getNumberOfShares() - amount);
+            setCash(getCash() + operationValue);
+            if (ownedStockShareToSell.getNumberOfShares() < 1) {
+                ownedSharesList.removeStock(ownedStockShareToSell);
+            }
+
+            System.out.println(ownedStockShareToSell.getStockName() + " sold for " + operationValue);
+            System.out.println("Cash after operation: " + getCash());
+        }
     }
 }

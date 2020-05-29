@@ -53,6 +53,7 @@ public class MainViewController {
     public void setupMainScene() {
         sideMenuViewController.setMainViewController(this);
         profileViewController.setUserDataSource(userData);
+        overviewViewController.setUserData(userData);
 
         overviewBox = overviewViewController.loadOverviewView();
         addViewBox = addViewController.loadAddView();

@@ -37,4 +37,15 @@ public class Stocks {
         }
         return stocksValue;
     }
+
+    public StockShare getStockShare(StockShare stockShareToGet) {
+        for (StockShare stockShare: stocksList) {
+            if (stockShare == stockShareToGet) {
+                return stockShare;
+            }
+        }
+        return null;
+    }
+
+
 }

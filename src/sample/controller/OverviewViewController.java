@@ -2,33 +2,33 @@ package sample.controller;
 
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import sample.model.StockShare;
 import sample.model.Stocks;
+import sample.model.UserData;
 
 
 public class OverviewViewController {
+    private UserData userData;
+
+
+
     public TableView<StockShare> overviewTable = new TableView<StockShare>();
 
     public final Stocks stocks = new Stocks(
-            new StockShare("CDR", "WIG20", 346, 346),
-            new StockShare("CDR", "WIG20", 346, 346),
-            new StockShare("CDR", "WIG20", 346, 346)
+            new StockShare("CDR", "WIG20", 346, 0)
     );
 
     private final ObservableList<StockShare> listOfStocks = stocks.getStocksList();
+
+    public void setUserData(UserData userData) {
+        this.userData = userData;
+    }
 
     /**
      * Method to load table view, overview of stocks
@@ -55,7 +55,6 @@ public class OverviewViewController {
         changePercent.setCellValueFactory(new PropertyValueFactory<>("changePercent"));
         numberOfShares.setCellValueFactory(new PropertyValueFactory<>("numberOfShares"));
         totalValueOfShares.setCellValueFactory(new PropertyValueFactory<>("totalValueOfShares"));
-
 
         companyName.setPrefWidth(116);
         stockIndex.setPrefWidth(116);
@@ -93,6 +92,7 @@ public class OverviewViewController {
 
     private void setUpDetails(StockShare selectedStock) {
         DetailsViewController detailsViewController = new DetailsViewController(selectedStock);
+        detailsViewController.setUserData(userData);
         detailsViewController.setUpDetails();
     }
 }
