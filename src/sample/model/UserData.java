@@ -38,31 +38,26 @@ public class UserData {
         return ownedSharesList.getStocksTotalValue();
     }
 
-    public void buyStockShare(StockShare stockShare, int amount) {
+    public StockShare buyStockShare(StockShare stockShare, int amount) {
         double operationValue = stockShare.getActualPrice() * amount;
         StockShare stockShareToBuy = ownedSharesList.getStockShare(stockShare);
         if (operationValue <= getCash()){
             System.out.println("Buying " + stockShareToBuy.getStockName());
             System.out.println("Cash before operation: " + getCash());
 
-
             setCash(getCash() - operationValue);
-//            if (stockShare.getNumberOfShares() < 1) {
-//                ownedSharesList.addStock(stockShare);
-//            }
             stockShareToBuy.setNumberOfShares(stockShareToBuy.getNumberOfShares() + amount);
-
-            ownedSharesList.removeStock(stockShareToBuy);
-            ownedSharesList.addStock(stockShareToBuy);
+            stockShareToBuy.setBoughtPrice(stockShareToBuy.getActualPrice());
 
             System.out.println(stockShareToBuy.getStockName() + " bought for " + operationValue);
             System.out.println("Cash after operation: " + getCash());
             System.out.println("Number of shares after operation: " + stockShareToBuy.getNumberOfShares());
-
         }
+
+        return stockShareToBuy;
     }
 
-    public void sellStockShare(StockShare stockShare, int amount) {
+    public StockShare sellStockShare(StockShare stockShare, int amount) {
         double operationValue = stockShare.getActualPrice() * amount;
         StockShare stockShareToSell = ownedSharesList.getStockShare(stockShare);
         if (amount <= stockShare.getNumberOfShares()) {
@@ -72,16 +67,11 @@ public class UserData {
             setCash(getCash() + operationValue);
             stockShareToSell.setNumberOfShares(stockShareToSell.getNumberOfShares() - amount);
 
-            ownedSharesList.removeStock(stockShareToSell);
-            ownedSharesList.addStock(stockShareToSell);
-
             System.out.println(stockShareToSell.getStockName() + " sold for " + operationValue);
             System.out.println("Cash after operation: " + getCash());
             System.out.println("Number of shares after operation: " + stockShareToSell.getNumberOfShares());
-
-//            if (stockShareToSell.getNumberOfShares() < 1) {
-//                ownedSharesList.removeStock(stockShareToSell);
-//            }
         }
+
+        return stockShareToSell;
     }
 }

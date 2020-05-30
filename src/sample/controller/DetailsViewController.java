@@ -148,7 +148,7 @@ public class DetailsViewController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 buyButtonPressed();
-
+                availableUserCash.setText(getUserCashString(userData.getCash()));
             }
         });
 
@@ -156,6 +156,7 @@ public class DetailsViewController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 sellButtonPressed();
+                availableUserCash.setText(getUserCashString(userData.getCash()));
             }
         });
 
@@ -169,13 +170,13 @@ public class DetailsViewController {
 
     private void buyButtonPressed() {
         if (buyPermision) {
-            userData.buyStockShare(stockShare, sharesAmount);
+            this.stockShare = userData.buyStockShare(stockShare, sharesAmount);
         }
     }
 
     private void sellButtonPressed() {
         if (sharesAmount <= stockShare.getNumberOfShares()) {
-            userData.sellStockShare(stockShare, sharesAmount);
+            this.stockShare = userData.sellStockShare(stockShare, sharesAmount);
         }
     }
 
