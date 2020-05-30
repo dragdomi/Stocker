@@ -21,9 +21,9 @@ public class MainViewController {
     private BorderPane mainLayout = new BorderPane();
 
     public final Stocks stocks = new Stocks(
-            new StockShare("CDR", "WIG20", 346, 346),
-            new StockShare("CDR", "WIG20", 346, 346),
-            new StockShare("CDR", "WIG20", 346, 346)
+            new StockShare("CDR", "Gaming", 346, 0),
+            new StockShare("PKOBP", "Banking", 22, 0),
+            new StockShare("PKN", "Fuels", 346, 0)
     );
 
     private UserData userData = new UserData("Marian", "Chudy", 1000, stocks);
@@ -52,8 +52,10 @@ public class MainViewController {
      */
     public void setupMainScene() {
         sideMenuViewController.setMainViewController(this);
-        profileViewController.setUserDataSource(userData);
         overviewViewController.setUserData(userData);
+        overviewViewController.setStocks(stocks);
+        profileViewController.setUserDataSource(userData);
+
 
         overviewBox = overviewViewController.loadOverviewView();
         addViewBox = addViewController.loadAddView();

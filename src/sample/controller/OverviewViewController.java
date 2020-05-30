@@ -1,6 +1,5 @@
 package sample.controller;
 
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -20,14 +19,18 @@ public class OverviewViewController {
 
     public TableView<StockShare> overviewTable = new TableView<StockShare>();
 
-    public final Stocks stocks = new Stocks(
+    public Stocks stocks = new Stocks(
             new StockShare("CDR", "WIG20", 346, 0)
     );
 
-    private final ObservableList<StockShare> listOfStocks = stocks.getStocksList();
+//    private ObservableList<StockShare> stocks = stocks.getStocksList();
 
     public void setUserData(UserData userData) {
         this.userData = userData;
+    }
+
+    public void setStocks(Stocks stocks) {
+        this.stocks = stocks;
     }
 
     /**
@@ -35,6 +38,7 @@ public class OverviewViewController {
      * @return overviewTable
      */
     public VBox loadOverviewView () {
+
         Label overviewLabel = new Label("Overview");
         overviewTable.setEditable(true);
 
@@ -65,7 +69,7 @@ public class OverviewViewController {
         numberOfShares.setPrefWidth(116);
         totalValueOfShares.setPrefWidth(116);
 
-        overviewTable.setItems(listOfStocks);
+        overviewTable.setItems(stocks.getStocksList());
 
         overviewTable.getColumns().addAll(companyName, stockIndex, boughtPrice,actualPrice ,change, changePercent,numberOfShares,totalValueOfShares);
         mousePressed();
