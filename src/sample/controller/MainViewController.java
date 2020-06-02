@@ -1,5 +1,7 @@
 package sample.controller;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -35,6 +37,7 @@ public class MainViewController {
     private ProfileViewController profileViewController = new ProfileViewController();
 
     public VBox overviewBox;
+    public VBox acutalOvervewBox;
     public VBox addViewBox;
     public VBox sideMenu;
     public HBox aboutUsBox;
@@ -54,23 +57,27 @@ public class MainViewController {
         sideMenuViewController.setMainViewController(this);
         overviewViewController.setUserData(userData);
         overviewViewController.setStocks(stocks);
+        stocks.task();
         profileViewController.setUserDataSource(userData);
 
 
-        overviewBox = overviewViewController.loadOverviewView();
         addViewBox = addViewController.loadAddView();
         sideMenu = sideMenuViewController.loadSideMenu();
         aboutUsBox = aboutUsViewController.loadAboutUsView();
         profileViewBox = profileViewController.loadProfileView();
 
+        overviewBox = overviewViewController.loadOverviewView();
         mainLayout.setCenter(overviewBox);
+
+
         mainLayout.setLeft(sideMenuViewController.loadSideMenu());
 
         Scene mainScene = new Scene(mainLayout, 1030, 400);
-
         mainStage.setTitle("Stocker");
         mainStage.setScene(mainScene);
         mainStage.show();
+
+
     }
 
     /**
