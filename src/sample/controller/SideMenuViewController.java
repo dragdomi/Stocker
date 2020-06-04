@@ -42,13 +42,13 @@ public class SideMenuViewController {
             }
         });
 
-        Button addButton = new Button("Buy Share");
+        Button addButton = new Button("My Stonks");
         setUpButton(addButton);
         addButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                mainViewController.setCenter(mainViewController.addViewBox);
-                System.out.println("Add view should appear");
+                mainViewController.setCenter(mainViewController.myStonksViewBox);
+                System.out.println("My stonks view should appear");
             }
         });
 

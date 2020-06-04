@@ -21,21 +21,21 @@ public class MainViewController {
     private BorderPane mainLayout = new BorderPane();
 
     public final Stocks stocks = new Stocks(
-            new StockShare("CDR", "WIG20", 346, 346),
-            new StockShare("CDR", "WIG20", 346, 346),
-            new StockShare("CDR", "WIG20", 346, 346)
+            new StockShare("CDR", "Gaming", 346, 0),
+            new StockShare("PKOBP", "Banking", 22, 0),
+            new StockShare("PKN", "Fuels", 346, 0)
     );
 
     private UserData userData = new UserData("Marian", "Chudy", 1000, stocks);
 
     private OverviewViewController overviewViewController = new OverviewViewController();
-    private AddViewController addViewController = new AddViewController();
+    private MyStonksViewController myStonksViewController = new MyStonksViewController();
     private SideMenuViewController sideMenuViewController = new SideMenuViewController();
     private AboutUsViewController aboutUsViewController = new AboutUsViewController();
     private ProfileViewController profileViewController = new ProfileViewController();
 
     public VBox overviewBox;
-    public VBox addViewBox;
+    public VBox myStonksViewBox;
     public VBox sideMenu;
     public HBox aboutUsBox;
     public VBox profileViewBox;
@@ -52,22 +52,31 @@ public class MainViewController {
      */
     public void setupMainScene() {
         sideMenuViewController.setMainViewController(this);
+        overviewViewController.setUserData(userData);
+        overviewViewController.setStocks(stocks);
+        overviewViewController.insertStocks();
+        myStonksViewController.setUserData(userData);
+        stocks.task();
         profileViewController.setUserDataSource(userData);
 
-        overviewBox = overviewViewController.loadOverviewView();
-        addViewBox = addViewController.loadAddView();
+
+        myStonksViewBox = myStonksViewController.loadMyStocks();
         sideMenu = sideMenuViewController.loadSideMenu();
         aboutUsBox = aboutUsViewController.loadAboutUsView();
         profileViewBox = profileViewController.loadProfileView();
 
+        overviewBox = overviewViewController.loadOverviewView();
         mainLayout.setCenter(overviewBox);
+
+
         mainLayout.setLeft(sideMenuViewController.loadSideMenu());
 
         Scene mainScene = new Scene(mainLayout, 1030, 400);
-
         mainStage.setTitle("Stocker");
         mainStage.setScene(mainScene);
         mainStage.show();
+
+
     }
 
     /**
