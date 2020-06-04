@@ -1,7 +1,5 @@
 package sample.controller;
 
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -31,14 +29,13 @@ public class MainViewController {
     private UserData userData = new UserData("Marian", "Chudy", 1000, stocks);
 
     private OverviewViewController overviewViewController = new OverviewViewController();
-    private AddViewController addViewController = new AddViewController();
+    private MyStonksViewController myStonksViewController = new MyStonksViewController();
     private SideMenuViewController sideMenuViewController = new SideMenuViewController();
     private AboutUsViewController aboutUsViewController = new AboutUsViewController();
     private ProfileViewController profileViewController = new ProfileViewController();
 
     public VBox overviewBox;
-    public VBox acutalOvervewBox;
-    public VBox addViewBox;
+    public VBox myStonksViewBox;
     public VBox sideMenu;
     public HBox aboutUsBox;
     public VBox profileViewBox;
@@ -57,11 +54,13 @@ public class MainViewController {
         sideMenuViewController.setMainViewController(this);
         overviewViewController.setUserData(userData);
         overviewViewController.setStocks(stocks);
+        overviewViewController.insertStocks();
+        myStonksViewController.setUserData(userData);
         stocks.task();
         profileViewController.setUserDataSource(userData);
 
 
-        addViewBox = addViewController.loadAddView();
+        myStonksViewBox = myStonksViewController.loadMyStocks();
         sideMenu = sideMenuViewController.loadSideMenu();
         aboutUsBox = aboutUsViewController.loadAboutUsView();
         profileViewBox = profileViewController.loadProfileView();

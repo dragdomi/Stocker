@@ -5,14 +5,24 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import sample.model.UserData;
 
-public class ProfileViewController {
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class ProfileViewController{
     private UserData userData;
+
 
     public void setUserDataSource(UserData userDataSource) {
         this.userData = userDataSource;
@@ -114,7 +124,7 @@ public class ProfileViewController {
         transactionHistoryButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("Transaction history view should appar");
+                userTransactionHistoryVBox();
             }
         });
 
@@ -125,16 +135,60 @@ public class ProfileViewController {
         return userTransactionHistory;
     }
 
-    private VBox userTransactionHistoryVBox() {
-        VBox userTransactionHistory = new VBox();
+    private void userTransactionHistoryVBox() {
+        Stage stage = new Stage();
+        TextArea textArea = new TextArea();
 
+        System.out.println("Transaction history view should appar");
+        FileChooser fileChooser = new FileChooser();
 
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extensionFilter);
 
-        return userTransactionHistory;
+        File file = fileChooser.showOpenDialog(stage);
+        if(file != null){
+            textArea.setText(readFile(file));
+        }
+
+        VBox mainLayout = new VBox(textArea);
+        Scene scene = new Scene(mainLayout,400,200);
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void setStyle(HBox box) {
         box.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         box.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, new CornerRadii(0), new BorderWidths(1))));
+    }
+
+    private String readFile(File file){
+        StringBuilder stringBuffer = new StringBuilder();
+        BufferedReader bufferedReader;
+        bufferedReader = null;
+
+        try {
+
+            bufferedReader = new BufferedReader(new FileReader(file));
+
+            String text;
+            while ((text = bufferedReader.readLine()) != null) {
+                stringBuffer.append(text);
+                System.out.println("TEST");
+                System.out.println(stringBuffer);
+            }
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ProfileViewController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ProfileViewController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                bufferedReader.close();
+            } catch (IOException ex) {
+                Logger.getLogger(ProfileViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return stringBuffer.toString();
     }
 }
