@@ -1,47 +1,33 @@
 package sample.controller;
 
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import sample.model.StockShare;
 import sample.model.Stocks;
 import sample.model.UserData;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.List;
+public class MyStonksViewController {
 
 
-public class OverviewViewController {
     private UserData userData;
-
-    public TableView<StockShare> overviewTable = new TableView<StockShare>();
-
-
-    public Stocks stocks = new Stocks(
-            new StockShare("CDR", "WIG20", 346, 10)
-    );
 
     public void setUserData(UserData userData) {
         this.userData = userData;
     }
 
-    public void setStocks(Stocks stocks) {
-        this.stocks = stocks;
-    }
+    public TableView<StockShare> overviewTable = new TableView<StockShare>();
 
-    /**
-     * Method to load table view, overview of stocks
-     * @return overviewTable
-     */
-    public VBox loadOverviewView () {
+
+    public Stocks stocks = new Stocks(
+            new StockShare("CDR", "WIG20", 346, 0)
+    );
+
+    public VBox loadMyStocks(){
 
         Label overviewLabel = new Label("Overview");
         overviewTable.setEditable(true);
@@ -74,7 +60,7 @@ public class OverviewViewController {
         numberOfShares.setPrefWidth(116);
         totalValueOfShares.setPrefWidth(116);
 
-        setItemsInTable();
+        overviewTable.setItems(stocks.getStocksList());
 
         overviewTable.getColumns().addAll(companyName, stockIndex, boughtPrice,actualPrice ,change, changePercent,numberOfShares,totalValueOfShares);
         mousePressed();
@@ -85,16 +71,6 @@ public class OverviewViewController {
 
         return overviewBox;
     }
-
-
-    public void setItemsInTable(){
-        overviewTable.setItems(stocks.getStocksList());
-    }
-
-    public void deleteItems(){
-        overviewTable.getItems().clear();
-    }
-
 
     public void mousePressed(){
         overviewTable.setRowFactory( tv -> {
@@ -115,21 +91,6 @@ public class OverviewViewController {
         detailsViewController.setUpDetails();
     }
 
-    public void insertStocks(){
-        String line = "";
-        String splitBy = ";";
 
-        try{
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("stocks.csv"));
-            System.out.println("Jest Dobrze Mordo");
-            while((line = bufferedReader.readLine()) != null){
-                String[] stock = line.split(splitBy,-1);
 
-                stocks.addStock(new StockShare(stock[0],stock[1],Double.parseDouble(stock[2]),Integer.parseInt(stock[3])));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("spierdalaj z mojej ziemi");
-        }
-    }
 }

@@ -4,6 +4,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.Collections;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Stocks {
     private ObservableList<StockShare> stocksList = FXCollections.observableArrayList();
@@ -46,6 +49,44 @@ public class Stocks {
         }
         return null;
     }
+
+    public void calculateActualPrice(){
+
+        for(StockShare stock: stocksList){
+            double random = ThreadLocalRandom.current().nextDouble(-15,+15);
+            random = (double) Math.round(random*100) / 100;
+
+            double newPrice = stock.getActualPrice()*(1 + random / 100);
+            newPrice = (double) Math.round(newPrice*100)/100;
+            if(newPrice > stock.getMaxValue()){
+                stock.setMaxValue(newPrice);
+            } else if (newPrice < stock.getMinValue()){
+                stock.setMinValue(newPrice);
+            }
+
+            System.out.println(stock.getActualPrice());
+            System.out.println(stock.getMaxValue());
+            System.out.println(stock.getMinValue());
+
+            stock.setActualPrice(newPrice);
+            stock.setChange(stock.getBoughtPrice()+newPrice);
+            stock.setChangePercent((stock.getBoughtPrice()+newPrice)/100);
+        }
+    }
+
+    Timer timer = new Timer();
+
+    public void task(){
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                calculateActualPrice();
+            }
+        };
+
+        timer.scheduleAtFixedRate(task,5000,5000);
+    }
+
 
 
 }
