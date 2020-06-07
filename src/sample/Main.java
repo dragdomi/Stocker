@@ -1,6 +1,8 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.stage.Stage;
 import sample.controller.MainViewController;
 
@@ -15,7 +17,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         mainViewController.setMainStage(primaryStage);
         mainViewController.setupMainScene();
-
     }
 
 }

@@ -51,7 +51,6 @@ public class Stocks {
     }
 
     public void calculateActualPrice(){
-
         for(StockShare stock: stocksList){
             double random = ThreadLocalRandom.current().nextDouble(-15,+15);
             random = (double) Math.round(random*100) / 100;

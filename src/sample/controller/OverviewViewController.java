@@ -33,7 +33,7 @@ public class OverviewViewController {
         this.userData = userData;
     }
 
-    public void setStocks(Stocks stocks) {
+   public void setStocks(Stocks stocks) {
         this.stocks = stocks;
     }
 
@@ -115,6 +115,7 @@ public class OverviewViewController {
         detailsViewController.setUpDetails();
     }
 
+
     public void insertStocks(){
         String line = "";
         String splitBy = ";";
@@ -133,3 +134,4 @@ public class OverviewViewController {
         }
     }
 }
+
