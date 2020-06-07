@@ -1,5 +1,6 @@
 package sample.controller;
 
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -9,6 +10,9 @@ import javafx.stage.Stage;
 import sample.model.StockShare;
 import sample.model.Stocks;
 import sample.model.UserData;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Main view controller
@@ -23,7 +27,7 @@ public class MainViewController {
     public final Stocks stocks = new Stocks(
             new StockShare("CDR", "Gaming", 346, 0),
             new StockShare("PKOBP", "Banking", 22, 0),
-            new StockShare("PKN", "Fuels", 346, 0)
+            new StockShare("PKN", "Fuels", 241, 0)
     );
 
     private UserData userData = new UserData("Marian", "Chudy", 1000, stocks);
@@ -56,7 +60,8 @@ public class MainViewController {
         overviewViewController.setStocks(stocks);
         overviewViewController.insertStocks();
         myStonksViewController.setUserData(userData);
-        stocks.task();
+        myStonksViewController.setStocks(userData.getOwnedSharesList());
+        task();
         profileViewController.setUserDataSource(userData);
 
 
@@ -85,4 +90,26 @@ public class MainViewController {
     public void setCenter(Node node) {
         mainLayout.setCenter(node);
     }
+
+    Timer timer = new Timer();
+
+    public void task() {
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                if(!mainStage.isShowing()) {
+                    System.out.println("KURWAAAA");
+                    timer.cancel();
+                    Platform.exit();
+                }
+                stocks.calculateActualPrice();
+                myStonksViewController.refreshTable();
+                overviewViewController.refreshTable();
+
+            }
+        };
+
+        timer.scheduleAtFixedRate(task,1000,1000);
+    }
+
 }

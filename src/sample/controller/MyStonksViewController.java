@@ -23,9 +23,11 @@ public class MyStonksViewController {
     public TableView<StockShare> overviewTable = new TableView<StockShare>();
 
 
-    public Stocks stocks = new Stocks(
-            new StockShare("CDR", "WIG20", 346, 0)
-    );
+    public Stocks stocks;
+
+    public void setStocks(Stocks stocks) {
+        this.stocks = stocks;
+    }
 
     public VBox loadMyStocks(){
 
@@ -89,6 +91,11 @@ public class MyStonksViewController {
         DetailsViewController detailsViewController = new DetailsViewController(selectedStock);
         detailsViewController.setUserData(userData);
         detailsViewController.setUpDetails();
+    }
+
+
+    public void refreshTable() {
+        overviewTable.refresh();
     }
 
 }

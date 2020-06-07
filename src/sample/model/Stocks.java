@@ -51,6 +51,7 @@ public class Stocks {
     }
 
     public void calculateActualPrice(){
+
         for(StockShare stock: stocksList){
             double random = ThreadLocalRandom.current().nextDouble(-15,+15);
             random = (double) Math.round(random*100) / 100;
@@ -63,28 +64,30 @@ public class Stocks {
                 stock.setMinValue(newPrice);
             }
 
-            System.out.println(stock.getActualPrice());
-            System.out.println(stock.getMaxValue());
-            System.out.println(stock.getMinValue());
+            System.out.println(stock.getStockName() + " actual price: " + stock.getActualPrice());
+            System.out.println(stock.getStockName() + " max price: " +stock.getMaxValue());
+            System.out.println(stock.getStockName() + " min price: " +stock.getMinValue());
+            System.out.println();
 
             stock.setActualPrice(newPrice);
             stock.setChange(stock.getBoughtPrice()+newPrice);
             stock.setChangePercent((stock.getBoughtPrice()+newPrice)/100);
+            stock.addPriceToHistory(newPrice);
         }
     }
 
-    Timer timer = new Timer();
-
-    public void task(){
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                calculateActualPrice();
-            }
-        };
-
-        timer.scheduleAtFixedRate(task,5000,5000);
-    }
+//    Timer timer = new Timer();
+//
+//    public void task(){
+//        TimerTask task = new TimerTask() {
+//            @Override
+//            public void run() {
+//                calculateActualPrice();
+//            }
+//        };
+//
+//        timer.scheduleAtFixedRate(task,5000,5000);
+//    }
 
 
 
