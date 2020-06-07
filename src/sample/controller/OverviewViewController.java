@@ -115,21 +115,23 @@ public class OverviewViewController {
         detailsViewController.setUpDetails();
     }
 
-  public void insertStocks(){
-       String line = "";
-       String splitBy = ";";
 
-       try{
-           BufferedReader bufferedReader = new BufferedReader(new FileReader("stocks.csv"));
+    public void insertStocks(){
+        String line = "";
+        String splitBy = ";";
+
+        try{
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("stocks.csv"));
             System.out.println("Jest Dobrze Mordo");
-           while((line = bufferedReader.readLine()) != null){
-               String[] stock = line.split(splitBy,-1);
+            while((line = bufferedReader.readLine()) != null){
+                String[] stock = line.split(splitBy,-1);
 
-               stocks.addStock(new StockShare(stock[0],stock[1],Double.parseDouble(stock[2]),Integer.parseInt(stock[3])));
-           }
-       } catch (IOException e) {
-           e.printStackTrace();
-           System.out.println("spierdalaj z mojej ziemi");
-       }
-  }
+                stocks.addStock(new StockShare(stock[0],stock[1],Double.parseDouble(stock[2]),Integer.parseInt(stock[3])));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("spierdalaj z mojej ziemi");
+        }
+    }
 }
+
