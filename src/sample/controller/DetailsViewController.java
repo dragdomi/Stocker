@@ -1,5 +1,7 @@
 package sample.controller;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -17,6 +19,8 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import sample.model.StockShare;
 import sample.model.UserData;
+
+import java.util.Collections;
 
 public class DetailsViewController {
     private UserData userData;
@@ -74,21 +78,19 @@ public class DetailsViewController {
         lineChart.setTitle("Stock Details");
         XYChart.Series series = new XYChart.Series();
 
-        series.getData().add(new XYChart.Data(1, 23));
-        series.getData().add(new XYChart.Data(2, 15));
-        series.getData().add(new XYChart.Data(3, 16));
-        series.getData().add(new XYChart.Data(4, 17));
-        series.getData().add(new XYChart.Data(5, 54));
-        series.getData().add(new XYChart.Data(6, 64));
-        series.getData().add(new XYChart.Data(7, 43));
-        series.getData().add(new XYChart.Data(8, 54));
-        series.getData().add(new XYChart.Data(9, 23));
-        series.getData().add(new XYChart.Data(10, 43));
+        ObservableList<XYChart.Data> chartData;
 
+        int i = 1;
+        for(Double price : stockShare.getPriceHistory()) {
+            series.getData().add(new XYChart.Data(i, price));
+            i += 1;
+        }
+        System.out.println(stockShare.getPriceHistory());
         series.setName("Stock Monitor");
 
         lineChart.getData().add(series);
         lineChart.setPadding(new Insets(10, 10, 10, 10));
+
 
         return lineChart;
     }
@@ -183,4 +185,5 @@ public class DetailsViewController {
     private String getUserCashString(double userCash) {
         return "Available cash: " + userCash;
     }
+
 }

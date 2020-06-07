@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
@@ -19,19 +20,20 @@ public class StockShare {
     private SimpleDoubleProperty totalValueOfShares;
     private SimpleDoubleProperty minValue = new SimpleDoubleProperty(0);
     private SimpleDoubleProperty maxValue = new SimpleDoubleProperty(0);
+    private ArrayList<Double> priceHistory = new ArrayList<Double>();
 
 
-    public StockShare(String stockName, String stockIndex, double boughtPrice, int numberOfShares) {
+    public StockShare(String stockName, String stockIndex, double actualPrice, int numberOfShares) {
         this.stockName = new SimpleStringProperty(stockName);
         this.stockIndex = new SimpleStringProperty(stockIndex);
-        this.boughtPrice = new SimpleDoubleProperty(boughtPrice);
-        this.actualPrice = new SimpleDoubleProperty(boughtPrice);
-        this.change = new SimpleDoubleProperty(boughtPrice - boughtPrice);
-        this.changePercent = new SimpleDoubleProperty((boughtPrice - boughtPrice) / 100);
+        this.boughtPrice = new SimpleDoubleProperty(0);
+        this.actualPrice = new SimpleDoubleProperty(actualPrice);
+        this.change = new SimpleDoubleProperty(0);
+        this.changePercent = new SimpleDoubleProperty(0);
         this.numberOfShares = new SimpleIntegerProperty(numberOfShares);
-        this.totalValueOfShares = new SimpleDoubleProperty(numberOfShares * boughtPrice);
-        this.minValue = new SimpleDoubleProperty(boughtPrice);
-        this.maxValue = new SimpleDoubleProperty(boughtPrice);
+        this.totalValueOfShares = new SimpleDoubleProperty(0);
+        this.minValue = new SimpleDoubleProperty(actualPrice);
+        this.maxValue = new SimpleDoubleProperty(actualPrice);
     }
 
     public String getStockName() {
@@ -114,5 +116,14 @@ public class StockShare {
         this.maxValue = new SimpleDoubleProperty(maxValue);
     }
 
-}
+    public void addPriceToHistory(double price) {
+        if(this.priceHistory.size() >= 10) {
+            this.priceHistory.remove(0);
+        }
+        this.priceHistory.add(price);
+    }
 
+    public ArrayList<Double> getPriceHistory() {
+        return priceHistory;
+    }
+}
