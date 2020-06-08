@@ -28,14 +28,13 @@ public class AboutUsViewController {
         Label dominikNameLabel = new Label("Drąg Dominik");
         Label arystydesNameLabel = new Label("Krukar Arystydes");
 
-
-        Hyperlink dominikEmail = new Hyperlink("dominikdrag98@gmail.com");
-        Hyperlink arystydesEmail = new Hyperlink("arystydes.krukar@gmail.com");
+        Hyperlink dominikEmail = new Hyperlink("\n\ndominikdrag98@gmail.com");
+        Hyperlink arystydesEmail = new Hyperlink("\n\narystydes.krukar@gmail.com");
 
         Hyperlink dominikGit = new Hyperlink("https://github.com/dragdominique");
         Hyperlink arystydesGit = new Hyperlink("https://github.com/Arys1998");
 
-        Label aboutDominik = new Label("\n\nLorem ipsum dolor sit amet,\n consectetur adipiscing elit. Donec sit amet scelerisque massa.\n Quisque tortor ex, sollicitudin cursus ante sed,\n eleifend lacinia felis. Vivamus tincidunt risus et\n lectus venenatis condimentum. Ut condimentum \nnunc lacinia dolor fermentum lacinia. Donec non diam\n in ipsum molestie vestibulum. Sed et risus eu ante\n iaculis dapibus quis id nisi. Phasellus \nfeugiat suscipit risus, id semper nunc commodo\n ut. Sed vel ligula aliquet nulla sodales vestibulum\n in non erat. Integer fringilla faucibus nunc eu \nvestibulum. Nullam sit amet velit pretium,\n iaculis quam a, lobortis mauris.");
+        Label aboutDominik = new Label("\n\n> Computer Science student.\n> Passionate to programming.\n> Creating apps to solve every day's problems.\n> Mainly using Swift and Java.");
         Label aboutArystydes = new Label("\n\nLorem ipsum dolor sit amet,\n consectetur adipiscing elit. Donec sit amet scelerisque massa.\n Quisque tortor ex, sollicitudin cursus ante sed,\n eleifend lacinia felis. Vivamus tincidunt risus et\n lectus venenatis condimentum. Ut condimentum \nnunc lacinia dolor fermentum lacinia. Donec non diam\n in ipsum molestie vestibulum. Sed et risus eu ante\n iaculis dapibus quis id nisi. Phasellus \nfeugiat suscipit risus, id semper nunc commodo\n ut. Sed vel ligula aliquet nulla sodales vestibulum\n in non erat. Integer fringilla faucibus nunc eu \nvestibulum. Nullam sit amet velit pretium,\n iaculis quam a, lobortis mauris.");
 
 
