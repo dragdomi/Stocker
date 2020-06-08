@@ -8,31 +8,61 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Stocks class for table view
+ */
 public class Stocks {
-    private ObservableList<StockShare> stocksList = FXCollections.observableArrayList();
+    /**
+     * Atribute of observable list to table view
+     */
+    public ObservableList<StockShare> stocksList = FXCollections.observableArrayList();
 
+    /**
+     * Constructor of stock share class
+     * @param stockShare
+     */
     public Stocks(StockShare... stockShare) {
         Collections.addAll(this.stocksList, stockShare);
     }
 
+    /**
+     * Method that adds stock to list
+     * @param stock
+     */
     public void addStock(StockShare stock) {
         this.stocksList.add(stock);
     }
 
+    /**
+     * Method that adds stock to collection
+     * @param stocksList
+     */
     public void addStocks(ObservableList<StockShare> stocksList) {
         for (StockShare stock : stocksList) {
             Collections.addAll(this.stocksList, stock);
         }
     }
 
+    /**
+     * Method that removes stock from list
+     * @param stock
+     */
     public void removeStock(StockShare stock) {
         this.stocksList.remove(stock);
     }
 
+    /**
+     * Returns stock list to table view
+     * @return stocksList
+     */
     public ObservableList getStocksList() {
         return this.stocksList;
     }
 
+    /**
+     * Return stocks total value to user data
+     * @return stocksValue
+     */
     public double getStocksTotalValue() {
         double stocksValue = 0;
         for(StockShare stock : stocksList) {
@@ -41,6 +71,11 @@ public class Stocks {
         return stocksValue;
     }
 
+    /**
+     * Gets the stock share to get
+     * @param stockShareToGet
+     * @return null
+     */
     public StockShare getStockShare(StockShare stockShareToGet) {
         for (StockShare stockShare: stocksList) {
             if (stockShare == stockShareToGet) {
@@ -50,6 +85,9 @@ public class Stocks {
         return null;
     }
 
+    /**
+     * Method that calculating actual price (simulation)
+     */
     public void calculateActualPrice(){
 
         for(StockShare stock: stocksList){
@@ -75,20 +113,5 @@ public class Stocks {
             stock.addPriceToHistory(newPrice);
         }
     }
-
-//    Timer timer = new Timer();
-//
-//    public void task(){
-//        TimerTask task = new TimerTask() {
-//            @Override
-//            public void run() {
-//                calculateActualPrice();
-//            }
-//        };
-//
-//        timer.scheduleAtFixedRate(task,5000,5000);
-//    }
-
-
 
 }

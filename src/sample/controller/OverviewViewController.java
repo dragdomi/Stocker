@@ -12,27 +12,34 @@ import sample.model.StockShare;
 import sample.model.Stocks;
 import sample.model.UserData;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
-
+/**
+ * Overview table view class
+ */
 public class OverviewViewController {
     private UserData userData;
 
-    public TableView<StockShare> overviewTable = new TableView<StockShare>();
+    private TableView<StockShare> overviewTable = new TableView<StockShare>();
 
 
-    public Stocks stocks = new Stocks(
+    private Stocks stocks = new Stocks(
             new StockShare("CDR", "WIG20", 346, 10)
     );
 
+    /**
+     * Sets user data
+     * @param userData
+     */
     public void setUserData(UserData userData) {
         this.userData = userData;
     }
 
+    /**
+     * Sets stock list
+     * @param stocks
+     */
     public void setStocks(Stocks stocks) {
         this.stocks = stocks;
     }
@@ -87,19 +94,21 @@ public class OverviewViewController {
     }
 
 
-    public void setItemsInTable(){
+    private void setItemsInTable(){
         overviewTable.setItems(stocks.getStocksList());
     }
 
-    public void deleteItems(){
-        overviewTable.getItems().clear();
-    }
-
+    /**
+     * Method that refresh table view
+     */
     public void refreshTable() {
         overviewTable.refresh();
     }
 
 
+    /**
+     * Action handler that provdes details view after clicking 2 times on stock
+     */
     public void mousePressed(){
         overviewTable.setRowFactory( tv -> {
             TableRow<StockShare> row = new TableRow<>();
@@ -113,12 +122,19 @@ public class OverviewViewController {
         });
     }
 
+    /**
+     * Sets up details view
+     * @param selectedStock
+     */
     public void setUpDetails(StockShare selectedStock) {
         DetailsViewController detailsViewController = new DetailsViewController(selectedStock);
         detailsViewController.setUserData(userData);
         detailsViewController.setUpDetails();
     }
 
+    /**
+     * Insert stock from csv file
+     */
     public void insertStocks(){
         String line = "";
         String splitBy = ";";
@@ -136,4 +152,32 @@ public class OverviewViewController {
             System.out.println("spierdalaj z mojej ziemi");
         }
     }
+
+    /**
+     * Saving actual state to csv file that game is not starting from beggining
+     * @throws IOException
+     */
+    public void saveActualState() throws IOException {
+        Writer writer = null;
+
+        try {
+            File file = new File("stocks.csv");
+            writer = new BufferedWriter(new FileWriter(file));
+
+            for(StockShare stockShare: stocks.stocksList){
+                String text = stockShare.getStockName() + ";" +stockShare.getStockIndex() + ";" + stockShare.getActualPrice() + ";" +stockShare.getNumberOfShares() + "\n";
+
+                writer.write(text);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        finally {
+            writer.flush();
+            writer.close();
+        }
+    }
+
+
 }
