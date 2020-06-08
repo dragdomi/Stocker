@@ -25,7 +25,7 @@ public class OverviewViewController {
 
 
     private Stocks stocks = new Stocks(
-            new StockShare("CDR", "WIG20", 346, 10)
+
     );
 
     /**

@@ -172,11 +172,9 @@ public class StockShare {
 
     /**
      * Sets total value of possessing shares
-     * @param numberOfShares
-     * @param sharePrice
      */
-    public void setTotalValueOfShares(int numberOfShares, double sharePrice) {
-        this.totalValueOfShares = new SimpleDoubleProperty(numberOfShares * sharePrice);
+    public void setTotalValueOfShares() {
+        this.totalValueOfShares = new SimpleDoubleProperty(getNumberOfShares() * getActualPrice());
     }
 
     /**
@@ -184,6 +182,7 @@ public class StockShare {
      * @return totalValueOfShares.get()
      */
     public double getTotalValueOfShares() {
+        setTotalValueOfShares();
         return this.totalValueOfShares.get();
     }
 

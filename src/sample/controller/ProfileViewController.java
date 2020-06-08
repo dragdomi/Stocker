@@ -1,8 +1,6 @@
 package sample.controller;
 
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -13,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sample.model.UserData;
@@ -27,6 +24,12 @@ import java.util.logging.Logger;
  */
 public class ProfileViewController{
     private UserData userData;
+
+    private Label userNameLabel;
+    private Label userSurnameLabel;
+    private Label userMoneyLabel;
+    private Label totalWalletValueLabel;
+    private Label transactionHistoryLabel;
 
     /**
      * sets user data
@@ -46,8 +49,6 @@ public class ProfileViewController{
         profileView.getChildren().addAll(
                 userDetails(),
                 userMoney(),
-                userShares(),
-                userTotalWalletValue(),
                 userTransactionHistory()
         );
 
@@ -70,8 +71,8 @@ public class ProfileViewController{
         VBox userDetails = new VBox();
 
         userDetails.setPrefHeight(80);
-        Label userNameLabel = new Label("Name: ");
-        Label userSurnameLabel = new Label("Surname: ");
+        userNameLabel = new Label("Name: ");
+        userSurnameLabel = new Label("Surname: ");
 
         userNameLabel.setText(userNameLabel.getText() + userData.getName());
         userSurnameLabel.setText(userSurnameLabel.getText() + userData.getSurname());
@@ -88,7 +89,7 @@ public class ProfileViewController{
 
         userMoney.setAlignment(Pos.CENTER_LEFT);
         userMoney.setPrefHeight(80);
-        Label userMoneyLabel = new Label("Money left: ");
+        userMoneyLabel = new Label("Money left: ");
 
         userMoneyLabel.setText(userMoneyLabel.getText() + String.valueOf(userData.getCash()));
 
@@ -99,40 +100,11 @@ public class ProfileViewController{
         return userMoney;
     }
 
-    private HBox userShares() {
-        HBox userShares = new HBox();
-
-        userShares.setPrefHeight(80);
-        Label sharesLabel = new Label("Shares: ");
-        userShares.setAlignment(Pos.CENTER_LEFT);
-        setStyle(userShares);
-        userShares.setPadding(new Insets(10,10,10,10));
-        userShares.getChildren().addAll(sharesLabel);
-
-        return userShares;
-    }
-
-    private HBox userTotalWalletValue() {
-        HBox userTotalWalletValue = new HBox();
-
-        userTotalWalletValue.setPrefHeight(80);
-        Label totalWalletValueLabel = new Label("Total wallet value: ");
-
-        totalWalletValueLabel.setText(totalWalletValueLabel.getText() + userData.getTotalWalletValue());
-
-        userTotalWalletValue.setAlignment(Pos.CENTER_LEFT);
-        setStyle(userTotalWalletValue);
-        userTotalWalletValue.setPadding(new Insets(10,10,10,10));
-        userTotalWalletValue.getChildren().addAll(totalWalletValueLabel);
-
-        return userTotalWalletValue;
-    }
-
     private HBox userTransactionHistory() {
         HBox userTransactionHistory = new HBox();
 
         userTransactionHistory.setPrefHeight(80);
-        Label transactionHistoryLabel = new Label("Transaction history: ");
+        transactionHistoryLabel = new Label("Transaction history: ");
         userTransactionHistory.setAlignment(Pos.CENTER_LEFT);
         Button transactionHistoryButton = new Button("View history");
         transactionHistoryButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -204,5 +176,9 @@ public class ProfileViewController{
         }
 
         return stringBuffer.toString();
+    }
+
+    public void updateView() {
+        userMoneyLabel.setText("Money left: " + userData.getCash());
     }
 }
