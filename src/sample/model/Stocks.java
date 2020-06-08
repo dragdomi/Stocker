@@ -4,8 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.Collections;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -67,6 +65,7 @@ public class Stocks {
         double stocksValue = 0;
         for(StockShare stock : stocksList) {
             stocksValue += stock.getTotalValueOfShares();
+            System.out.println(stocksValue);
         }
         return stocksValue;
     }
@@ -86,7 +85,7 @@ public class Stocks {
     }
 
     /**
-     * Method that calculating actual price (simulation)
+     * Method that is calculating actual price (simulation)
      */
     public void calculateActualPrice(){
 

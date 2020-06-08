@@ -116,6 +116,7 @@ public class MainViewController {
                 userStocks.calculateActualPrice();
                 myStonksViewController.refreshTable();
                 overviewViewController.refreshTable();
+                profileViewController.updateView();
                 try {
                     overviewViewController.saveActualState();
                 } catch (IOException e) {
