@@ -99,7 +99,6 @@ public class DetailsViewController {
             series.getData().add(new XYChart.Data(i, price));
             i += 1;
         }
-        System.out.println(stockShare.getPriceHistory());
         series.setName("Stock Monitor");
 
         lineChart.getData().add(series);

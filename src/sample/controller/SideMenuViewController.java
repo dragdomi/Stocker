@@ -38,7 +38,6 @@ public class SideMenuViewController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 mainViewController.setCenter(mainViewController.overviewBox);
-                System.out.println("Overwiew view should appear");
             }
         });
 
@@ -48,7 +47,6 @@ public class SideMenuViewController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 mainViewController.setCenter(mainViewController.myStonksViewBox);
-                System.out.println("My stonks view should appear");
             }
         });
 
@@ -59,7 +57,6 @@ public class SideMenuViewController {
             public void handle(ActionEvent actionEvent) {
 
                 mainViewController.setCenter(mainViewController.profileViewBox);
-                System.out.println("Profile view should appear");
             }
         });
 
@@ -68,7 +65,6 @@ public class SideMenuViewController {
         aboutUsButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("About us view should appar");
                 mainViewController.setCenter(mainViewController.aboutUsBox);
             }
         });

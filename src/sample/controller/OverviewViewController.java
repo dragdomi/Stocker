@@ -141,7 +141,6 @@ public class OverviewViewController {
 
         try{
             BufferedReader bufferedReader = new BufferedReader(new FileReader("stocks.csv"));
-            System.out.println("Jest Dobrze Mordo");
             while((line = bufferedReader.readLine()) != null){
                 String[] stock = line.split(splitBy,-1);
 
@@ -149,7 +148,6 @@ public class OverviewViewController {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("spierdalaj z mojej ziemi");
         }
     }
 

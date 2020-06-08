@@ -108,7 +108,6 @@ public class MainViewController {
             @Override
             public void run() {
                 if(!mainStage.isShowing()) {
-                    System.out.println("KURWAAAA");
                     timer.cancel();
                     Platform.exit();
                 }

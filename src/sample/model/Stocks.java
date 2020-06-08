@@ -65,7 +65,6 @@ public class Stocks {
         double stocksValue = 0;
         for(StockShare stock : stocksList) {
             stocksValue += stock.getTotalValueOfShares();
-            System.out.println(stocksValue);
         }
         return stocksValue;
     }
@@ -100,11 +99,6 @@ public class Stocks {
             } else if (newPrice < stock.getMinValue()){
                 stock.setMinValue(newPrice);
             }
-
-            System.out.println(stock.getStockName() + " actual price: " + stock.getActualPrice());
-            System.out.println(stock.getStockName() + " max price: " +stock.getMaxValue());
-            System.out.println(stock.getStockName() + " min price: " +stock.getMinValue());
-            System.out.println();
 
             stock.setActualPrice(newPrice);
             stock.setChange(stock.getBoughtPrice()+newPrice);

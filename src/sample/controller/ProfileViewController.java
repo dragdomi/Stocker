@@ -125,7 +125,6 @@ public class ProfileViewController{
         Stage stage = new Stage();
         TextArea textArea = new TextArea();
 
-        System.out.println("Transaction history view should appar");
         FileChooser fileChooser = new FileChooser();
 
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
@@ -159,8 +158,6 @@ public class ProfileViewController{
             String text;
             while ((text = bufferedReader.readLine()) != null) {
                 stringBuffer.append(text);
-                System.out.println("TEST");
-                System.out.println(stringBuffer);
             }
 
         } catch (FileNotFoundException ex) {
