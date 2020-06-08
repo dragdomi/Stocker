@@ -6,6 +6,11 @@ import javafx.concurrent.Task;
 import javafx.stage.Stage;
 import sample.controller.MainViewController;
 
+/**
+ * @author arystydeskrukar
+ * @author dominikdrag
+ * @version 1.0
+ */
 public class Main extends Application {
     private MainViewController mainViewController = new MainViewController();
 
@@ -13,6 +18,12 @@ public class Main extends Application {
         launch(args);
     }
 
+    /**
+     *
+     * @param primaryStage
+     * @throws Exception
+     * Starts the program
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         mainViewController.setMainStage(primaryStage);

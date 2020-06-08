@@ -5,13 +5,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -20,26 +19,38 @@ import javafx.stage.Stage;
 import sample.model.StockShare;
 import sample.model.UserData;
 
+import java.io.*;
 import java.util.Collections;
 
 public class DetailsViewController {
     private UserData userData;
-    StockShare stockShare;
-    Stage stockDetails = new Stage();
-    VBox mainVBox = new VBox();
+    private StockShare stockShare;
+    private Stage stockDetails = new Stage();
+    private VBox mainVBox = new VBox();
 
-    Double operationValue;
-    int sharesAmount;
-    boolean buyPermision = false;
+    private Double operationValue;
+    private int sharesAmount;
+    private boolean buyPermision = false;
 
+    /**
+     * Constructor of class DetailsViewController
+     * @param stockShare
+     */
     DetailsViewController(StockShare stockShare) {
         this.stockShare = stockShare;
     }
 
+    /**
+     * Sets user data
+     * @param userData
+     */
     public void setUserData(UserData userData) {
         this.userData = userData;
     }
 
+    /**
+     * Sets up details view with buy operations for specific stock
+     */
     public void setUpDetails() {
         stockDetails.setTitle("Company Details");
         mainVBox.getChildren().addAll(setUpName(), setUpChart(), setUpOperation());
@@ -59,6 +70,9 @@ public class DetailsViewController {
         companyName.setPrefHeight(40);
         companyName.setPadding(new Insets(0, 10, 0, 0));
         Label sharePrice = new Label(String.valueOf(this.stockShare.getActualPrice()));
+        sharePrice.textProperty().addListener((observable) -> {
+            sharePrice.setText(String.valueOf(this.stockShare.getActualPrice()));
+        });
         sharePrice.setPrefHeight(40);
         companyDetails.getChildren().addAll(companyName, sharePrice);
         companyDetails.setPadding(new Insets(10, 10, 10, 10));
@@ -104,11 +118,12 @@ public class DetailsViewController {
 
         Label minPriceLabel = new Label("Minimum Price: ");
         Label maxPriceLabel = new Label("Maximum Price: ");
-        Label testPrice = new Label("3.20");
+        Label priceMin = new Label(String.valueOf(this.stockShare.getMinValue()));
+        Label priceMax = new Label(String.valueOf(this.stockShare.getMaxValue()));
         minPrice.setPadding(new Insets(10, 10, 10, 10));
         maxPrice.setPadding(new Insets(10, 10, 10, 10));
-        minPrice.getChildren().addAll(minPriceLabel, testPrice);
-        maxPrice.getChildren().addAll(maxPriceLabel, testPrice);
+        minPrice.getChildren().addAll(minPriceLabel, priceMin);
+        maxPrice.getChildren().addAll(maxPriceLabel, priceMax);
 
         priceBox.getChildren().addAll(minPrice, maxPrice);
 
@@ -150,7 +165,15 @@ public class DetailsViewController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 buyButtonPressed();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "You bought "+stockShare.getStockName() + " for: "+stockShare.getActualPrice(), ButtonType.OK);
+                alert.showAndWait();
                 availableUserCash.setText(getUserCashString(userData.getCash()));
+                try {
+                    writeToTransactionHistory("BUY");
+                    saveUserStocks();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -158,7 +181,14 @@ public class DetailsViewController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 sellButtonPressed();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "You sold "+stockShare.getStockName() + " for: "+ stockShare.getActualPrice(), ButtonType.OK);
+                alert.showAndWait();
                 availableUserCash.setText(getUserCashString(userData.getCash()));
+                try {
+                    writeToTransactionHistory("SELL");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -184,6 +214,36 @@ public class DetailsViewController {
 
     private String getUserCashString(double userCash) {
         return "Available cash: " + userCash;
+    }
+
+    private void writeToTransactionHistory(String type) throws IOException {
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("transactionHistory.txt", true));
+            String text = stockShare.getStockName() + ";" +stockShare.getStockIndex() + ";" + stockShare.getBoughtPrice() + ";" +stockShare.getNumberOfShares() +";"+ type +"\n";
+
+            writer.write(text);
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveUserStocks() throws IOException {
+        Writer writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter("userStocks.csv", true));
+            String text = stockShare.getStockName() + ";" + stockShare.getStockIndex() + ";" + stockShare.getActualPrice() + ";" +stockShare.getNumberOfShares() + "\n";
+            writer.write(text);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            writer.flush();
+            writer.close();
+        }
     }
 
 }

@@ -1,1 +1,3 @@
-Sprawdzanie poprawności działania kodu
+
+PKOBP;Banking;16.1;1;BUY
+CDR;Gaming;576.74;1;BUY

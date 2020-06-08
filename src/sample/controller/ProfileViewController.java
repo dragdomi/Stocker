@@ -1,6 +1,8 @@
 package sample.controller;
 
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -20,14 +22,24 @@ import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * User profile class
+ */
 public class ProfileViewController{
     private UserData userData;
 
-
+    /**
+     * sets user data
+     * @param userDataSource
+     */
     public void setUserDataSource(UserData userDataSource) {
         this.userData = userDataSource;
     }
 
+    /**
+     * Sets up a profile view
+     * @return profileView node with user profile view
+     */
     public VBox loadProfileView() {
         VBox profileView = new VBox();
         profileView.setPadding(new Insets(10,10,10,10));
@@ -38,8 +50,10 @@ public class ProfileViewController{
                 userTotalWalletValue(),
                 userTransactionHistory()
         );
+
         return profileView;
     }
+
 
     private HBox userDetails() {
         HBox userDetails = new HBox();
@@ -76,7 +90,7 @@ public class ProfileViewController{
         userMoney.setPrefHeight(80);
         Label userMoneyLabel = new Label("Money left: ");
 
-        userMoneyLabel.setText(userMoneyLabel.getText() + userData.getCash());
+        userMoneyLabel.setText(userMoneyLabel.getText() + String.valueOf(userData.getCash()));
 
         setStyle(userMoney);
         userMoney.setPadding(new Insets(10,10,10,10));

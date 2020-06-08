@@ -11,6 +11,7 @@ import sample.model.StockShare;
 import sample.model.Stocks;
 import sample.model.UserData;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,10 +25,12 @@ public class MainViewController {
 
     private BorderPane mainLayout = new BorderPane();
 
-    public final Stocks stocks = new Stocks(
-            new StockShare("CDR", "Gaming", 346, 0),
-            new StockShare("PKOBP", "Banking", 22, 0),
-            new StockShare("PKN", "Fuels", 241, 0)
+    private final Stocks stocks = new Stocks(
+
+    );
+
+    private final Stocks userStocks = new Stocks(
+
     );
 
     private UserData userData = new UserData("Marian", "Chudy", 1000, stocks);
@@ -38,6 +41,9 @@ public class MainViewController {
     private AboutUsViewController aboutUsViewController = new AboutUsViewController();
     private ProfileViewController profileViewController = new ProfileViewController();
 
+    /**
+     * Atributes of every view
+     */
     public VBox overviewBox;
     public VBox myStonksViewBox;
     public VBox sideMenu;
@@ -60,7 +66,8 @@ public class MainViewController {
         overviewViewController.setStocks(stocks);
         overviewViewController.insertStocks();
         myStonksViewController.setUserData(userData);
-        myStonksViewController.setStocks(userData.getOwnedSharesList());
+        myStonksViewController.setStocks(userStocks);
+        myStonksViewController.insertData();
         task();
         profileViewController.setUserDataSource(userData);
 
@@ -93,6 +100,9 @@ public class MainViewController {
 
     Timer timer = new Timer();
 
+    /**
+     * Tasker to simulation, refreshing table with new values and save csv file
+     */
     public void task() {
         TimerTask task = new TimerTask() {
             @Override
@@ -103,13 +113,20 @@ public class MainViewController {
                     Platform.exit();
                 }
                 stocks.calculateActualPrice();
+                userStocks.calculateActualPrice();
                 myStonksViewController.refreshTable();
                 overviewViewController.refreshTable();
-
+                try {
+                    overviewViewController.saveActualState();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         };
 
         timer.scheduleAtFixedRate(task,1000,1000);
     }
+
+
 
 }

@@ -11,24 +11,42 @@ import sample.model.StockShare;
 import sample.model.Stocks;
 import sample.model.UserData;
 
-public class MyStonksViewController {
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
+/**
+ * User stocks class
+ */
+public class MyStonksViewController {
 
     private UserData userData;
 
+    /**
+     * Sets user data
+     * @param userData
+     */
     public void setUserData(UserData userData) {
         this.userData = userData;
     }
 
-    public TableView<StockShare> overviewTable = new TableView<StockShare>();
+    private TableView<StockShare> overviewTable = new TableView<StockShare>();
 
 
-    public Stocks stocks;
+    private Stocks stocks = new Stocks();
 
+    /**
+     * Sets user stocks
+     * @param stocks
+     */
     public void setStocks(Stocks stocks) {
         this.stocks = stocks;
     }
 
+    /**
+     * View of user stocks
+     * @return overviewBox - user owned shared list
+     */
     public VBox loadMyStocks(){
 
         Label overviewLabel = new Label("Overview");
@@ -74,6 +92,9 @@ public class MyStonksViewController {
         return overviewBox;
     }
 
+    /**
+     * Action handler that provdes details view after clicking 2 times on stock
+     */
     public void mousePressed(){
         overviewTable.setRowFactory( tv -> {
             TableRow<StockShare> row = new TableRow<>();
@@ -87,13 +108,38 @@ public class MyStonksViewController {
         });
     }
 
+    /**
+     * Sets up details view
+     * @param selectedStock
+     */
     public void setUpDetails(StockShare selectedStock) {
         DetailsViewController detailsViewController = new DetailsViewController(selectedStock);
         detailsViewController.setUserData(userData);
         detailsViewController.setUpDetails();
     }
 
+    public void insertData(){
+        String line = "";
+        String splitBy = ";";
 
+        try{
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("userStocks.csv"));
+            System.out.println("Jest Dobrze Mordo");
+            while((line = bufferedReader.readLine()) != null){
+                String[] stock = line.split(splitBy,-1);
+
+                this.stocks.addStock(new StockShare(stock[0],stock[1],Double.parseDouble(stock[2]),Double.parseDouble(stock[2]),Integer.parseInt(stock[3])));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("spierdalaj z mojej ziemi");
+        }
+    }
+
+
+    /**
+     * Refreshing table
+     */
     public void refreshTable() {
         overviewTable.refresh();
     }
