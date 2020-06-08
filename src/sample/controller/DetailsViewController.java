@@ -186,6 +186,7 @@ public class DetailsViewController {
                 availableUserCash.setText(getUserCashString(userData.getCash()));
                 try {
                     writeToTransactionHistory("SELL");
+                    deleteUserStocks();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -245,5 +246,26 @@ public class DetailsViewController {
             writer.close();
         }
     }
+
+    private void deleteUserStocks() throws IOException {
+        Writer writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter("userStocks.csv", true));
+            String text = stockShare.getStockName() + ";" + stockShare.getStockIndex() + ";" + stockShare.getActualPrice() + ";" +stockShare.getNumberOfShares() + "\n";
+
+            if(!text.equals(stockShare.getStockName() + ";" + stockShare.getStockIndex() + ";" + stockShare.getActualPrice() + ";" + stockShare.getNumberOfShares() + "\n")){
+                writer.write(text);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            writer.flush();
+            writer.close();
+        }
+    }
+
 
 }

@@ -29,9 +29,6 @@ public class MainViewController {
 
     );
 
-    private final Stocks userStocks = new Stocks(
-
-    );
 
     private UserData userData = new UserData("Marian", "Chudy", 1000, stocks);
 
@@ -66,8 +63,7 @@ public class MainViewController {
         overviewViewController.setStocks(stocks);
         overviewViewController.insertStocks();
         myStonksViewController.setUserData(userData);
-        myStonksViewController.setStocks(userStocks);
-        myStonksViewController.insertData();
+        myStonksViewController.setStocks(userData.getOwnedSharesList());
         task();
         profileViewController.setUserDataSource(userData);
 
@@ -113,7 +109,6 @@ public class MainViewController {
                     Platform.exit();
                 }
                 stocks.calculateActualPrice();
-                userStocks.calculateActualPrice();
                 myStonksViewController.refreshTable();
                 overviewViewController.refreshTable();
                 profileViewController.updateView();
