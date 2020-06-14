@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class Rate {
     private String no;
     private LocalDate effectiveDate;
-    private double mid;
+    public double mid;
 
     @JsonProperty("no")
     public String getNo() { return no; }

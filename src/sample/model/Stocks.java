@@ -101,6 +101,7 @@ public class Stocks {
             }
 
             stock.setActualPrice(newPrice);
+            stock.setActualEuroPrice(newPrice*4.44);
             stock.setChange(stock.getBoughtPrice()+newPrice);
             stock.setChangePercent((stock.getBoughtPrice()+newPrice)/100);
             stock.addPriceToHistory(newPrice);

@@ -17,6 +17,7 @@ public class StockShare {
     private SimpleStringProperty stockIndex;
     private SimpleDoubleProperty boughtPrice;
     private SimpleDoubleProperty actualPrice;
+    private SimpleDoubleProperty actualEuroPrice;
     private SimpleIntegerProperty numberOfShares;
     private SimpleDoubleProperty change;
     private SimpleDoubleProperty changePercent;
@@ -37,6 +38,7 @@ public class StockShare {
         this.stockIndex = new SimpleStringProperty(stockIndex);
         this.boughtPrice = new SimpleDoubleProperty(0);
         this.actualPrice = new SimpleDoubleProperty(actualPrice);
+        this.actualEuroPrice = new SimpleDoubleProperty(actualPrice*4.44);
         this.change = new SimpleDoubleProperty(0);
         this.changePercent = new SimpleDoubleProperty(0);
         this.numberOfShares = new SimpleIntegerProperty(numberOfShares);
@@ -144,6 +146,13 @@ public class StockShare {
      */
     public double getActualPrice() {
         return this.actualPrice.get();
+    }
+
+    public double getActualEuroPrice() {
+        return this.actualEuroPrice.get();
+    }
+    public void setActualEuroPrice(double actualEuroPrice) {
+        this.actualEuroPrice = new SimpleDoubleProperty(actualEuroPrice);
     }
 
     /**

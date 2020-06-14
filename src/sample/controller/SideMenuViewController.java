@@ -41,7 +41,7 @@ public class SideMenuViewController {
             }
         });
 
-        Button addButton = new Button("My Stonks");
+        Button addButton = new Button("My Stocks");
         setUpButton(addButton);
         addButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

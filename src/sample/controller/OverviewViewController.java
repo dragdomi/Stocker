@@ -1,17 +1,18 @@
 package sample.controller;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import sample.model.StockShare;
 import sample.model.Stocks;
 import sample.model.UserData;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.List;
 
@@ -81,6 +82,24 @@ public class OverviewViewController {
         numberOfShares.setPrefWidth(116);
         totalValueOfShares.setPrefWidth(116);
 
+        Button changeCurrency = new Button("EUR");
+        changeCurrency.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                actualPrice.setCellValueFactory(new PropertyValueFactory<>("actualEuroPrice"));
+            }
+        });
+
+        Button changePLNCurrency = new Button("PLN");
+        changePLNCurrency.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                actualPrice.setCellValueFactory(new PropertyValueFactory<>("actualPrice"));
+            }
+        });
+
+        HBox buttons = new HBox();
+        buttons.getChildren().addAll(changeCurrency,changePLNCurrency);
         setItemsInTable();
 
         overviewTable.getColumns().addAll(companyName, stockIndex, boughtPrice,actualPrice ,change, changePercent,numberOfShares,totalValueOfShares);
@@ -88,7 +107,10 @@ public class OverviewViewController {
         VBox overviewBox = new VBox();
         overviewBox.setSpacing(5);
         overviewBox.setPadding(new Insets(10,10,10,10));
-        overviewBox.getChildren().addAll(overviewLabel, overviewTable);
+
+
+
+        overviewBox.getChildren().addAll(overviewLabel,buttons, overviewTable);
 
         return overviewBox;
     }

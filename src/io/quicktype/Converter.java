@@ -62,7 +62,7 @@ public class Converter {
     }
     // Serialize/deserialize helpers
 
-    public static Welcome fromJsonString(String json) throws IOException {
+    public static Rate fromJsonString(String json) throws IOException {
         return getObjectReader().readValue(json);
     }
 

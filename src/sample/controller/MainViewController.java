@@ -88,7 +88,6 @@ public class MainViewController {
         mainStage.setScene(mainScene);
         mainStage.show();
 
-
     }
 
     /**
